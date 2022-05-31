@@ -10,10 +10,13 @@
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:text="Pendientes"
         android:textSize="24sp"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="35dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.171"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView14"
@@ -22,8 +25,10 @@
         android:layout_marginTop="80dp"
         android:text="Ultimas salidas de material"
         android:textSize="24sp"
-        app:layout_constraintTop_toBottomOf="@+id/textView17"
-        tools:layout_editor_absoluteX="40dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.409"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
     <TextView
         android:id="@+id/textView15"
