@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Editar_usuario">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuarios"
+        android:textSize="34sp"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="38dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Codigo de super usuario"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="122dp" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar "
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="197dp" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Eliminar"
+        tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="197dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
