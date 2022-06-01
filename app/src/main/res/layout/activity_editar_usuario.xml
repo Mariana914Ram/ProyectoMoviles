@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:layout_marginTop="28dp"
+        android:backgroundTint="#0C67F4"
         android:text="Agregar "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
@@ -47,7 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="112dp"
+        android:backgroundTint="#0C67F4"
         android:text="Eliminar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8"
+        app:strokeColor="#E1E1E1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
