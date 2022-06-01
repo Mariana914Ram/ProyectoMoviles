@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName8"
+        android:id="@+id/et_codigoSuser"
         android:layout_width="277dp"
         android:layout_height="53dp"
         android:layout_marginTop="36dp"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_agregar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
@@ -40,10 +40,10 @@
         android:backgroundTint="#0C67F4"
         android:text="Agregar "
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8" />
+        app:layout_constraintTop_toBottomOf="@+id/et_codigoSuser" />
 
     <Button
-        android:id="@+id/button13"
+        android:id="@+id/btn_eliminar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -51,6 +51,6 @@
         android:backgroundTint="#0C67F4"
         android:text="Eliminar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName8"
+        app:layout_constraintTop_toBottomOf="@+id/et_codigoSuser"
         app:strokeColor="#E1E1E1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

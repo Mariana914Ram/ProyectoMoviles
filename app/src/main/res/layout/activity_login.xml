@@ -7,9 +7,9 @@
     tools:context=".Login">
 
     <EditText
-        android:id="@+id/edtCorreo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/et_correo"
+        android:layout_width="212dp"
+        android:layout_height="56dp"
         android:layout_marginStart="100dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="101dp"
@@ -22,19 +22,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/edtPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/et_contra"
+        android:layout_width="213dp"
+        android:layout_height="64dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="101dp"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtCorreo" />
+        app:layout_constraintTop_toBottomOf="@+id/et_correo" />
 
     <TextView
         android:id="@+id/textView"
@@ -50,21 +50,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnIngresar"
+        android:id="@+id/btn_ingresar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="158dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="159dp"
         android:backgroundTint="#0C67F4"
-        android:onClick="ingresarMenu"
         android:text="Ingresar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/et_contra" />
 
     <Button
-        android:id="@+id/btnRegistrar"
+        android:id="@+id/btn_registrar"
         android:layout_width="138dp"
         android:layout_height="57dp"
         android:layout_marginStart="158dp"
@@ -75,10 +74,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnIngresar" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_ingresar" />
 
     <CheckBox
-        android:id="@+id/cbGuardar"
+        android:id="@+id/cb_guardarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -86,6 +85,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.28"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRegistrar" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_registrar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

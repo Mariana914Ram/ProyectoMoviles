@@ -14,9 +14,9 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mail = findViewById(R.id.edtCorreo);
-        password = findViewById(R.id.edtPassword);
-        guardar = (CheckBox) findViewById(R.id.cbGuardar);
+        mail = findViewById(R.id.et_correo);
+        password = findViewById(R.id.et_contra);
+        guardar = (CheckBox) findViewById(R.id.cb_guardarSesion);
     }
 
 
