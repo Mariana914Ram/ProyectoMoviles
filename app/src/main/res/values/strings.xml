@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">Proyecto</string>
+    <string name="app_name">ProyectoFinal</string>
+
+    <string name="guardarSesion">Guardar sesión</string>
+
+    //Menú
+    <string name="ver_almacen">Ver almacén</string>
+    <string name="salida_material">Salida de material</string>
+    <string name="pendientes">Pendientes</string>
+    <string name="agregar_usuario">Agregar usuario</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
 </resources>

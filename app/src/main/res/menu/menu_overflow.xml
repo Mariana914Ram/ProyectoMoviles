@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itemAlmacen"
+        android:title="@string/ver_almacen" />
+    <item
+        android:id="@+id/itemMaterial"
+        android:title="@string/salida_material" />
+    <item
+        android:id="@+id/itemPendientes"
+        android:title="@string/pendientes" />
+    <item
+        android:id="@+id/itemUsuario"
+        android:title="@string/agregar_usuario" />
+    <item
+        android:id="@+id/itemCerrar"
+        android:title="@string/cerrar_sesion" />
+</menu>

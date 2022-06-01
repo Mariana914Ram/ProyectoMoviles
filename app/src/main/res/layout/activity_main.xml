@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="108dp"
-        android:text="Ver Almacen"
+        android:text="@string/ver_almacen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
-        android:text="Pendientes"
+        android:text="@string/pendientes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button6" />
 
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="44dp"
-        android:text="Cerrar sesion"
+        android:text="@string/cerrar_sesion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button8" />
 
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
-        android:text="Agregar usuario"
+        android:text="@string/agregar_usuario"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button7" />
 
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
-        android:text="Salida de material"
+        android:text="@string/salida_material"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button5" />
 

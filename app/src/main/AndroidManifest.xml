@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto">
+        <activity android:name=".ActivityMenu"></activity>
         <activity
             android:name=".vista_almacen"
             android:exported="false" />
