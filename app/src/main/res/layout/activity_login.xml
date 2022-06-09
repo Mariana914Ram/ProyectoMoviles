@@ -8,31 +8,30 @@
 
     <EditText
         android:id="@+id/et_correo"
-        android:layout_width="212dp"
-        android:layout_height="56dp"
+        android:layout_width="260dp"
+        android:layout_height="58dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="101dp"
         android:ems="10"
         android:hint="Correo"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/et_contra"
-        android:layout_width="213dp"
-        android:layout_height="64dp"
+        android:layout_width="259dp"
+        android:layout_height="58dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="101dp"
         android:ems="10"
         android:hint="Contraseña"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_correo" />
 
@@ -41,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="171dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="171dp"
         android:text="Bienvenido"
         android:textSize="34sp"
@@ -51,12 +50,13 @@
 
     <Button
         android:id="@+id/btn_ingresar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="144dp"
+        android:layout_height="52dp"
         android:layout_marginStart="158dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="159dp"
         android:backgroundTint="#0C67F4"
+        android:onClick="ingresarMenu"
         android:text="Ingresar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,27 +64,16 @@
 
     <Button
         android:id="@+id/btn_registrar"
-        android:layout_width="138dp"
+        android:layout_width="146dp"
         android:layout_height="57dp"
         android:layout_marginStart="158dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="159dp"
         android:backgroundTint="#0C67F4"
+        android:onClick="registrarU"
         android:text="Registrarse"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_ingresar" />
-
-    <CheckBox
-        android:id="@+id/cb_guardarSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/guardarSesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.28"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_registrar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
