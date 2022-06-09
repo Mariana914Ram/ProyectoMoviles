@@ -50,51 +50,54 @@ public class Login extends AppCompatActivity {
                 String[] modelos = abrir.split("\n\n");
                 for(int i=0; i<modelos.length; i++){
                     String[] parts = abrir.split("\n");
+                    String id_temp = "";
+                    String correo_temp = "";
+                    String contrasena_temp = "";
+                    String nombre_temp = "";
+                    String tipo_temp = "";
+                    String apellido_temp = "";
                     for(int j=0; j<parts.length; j++){
-                        String id_temp = "";
-                        String correo_temp = "";
-                        String contrasena_temp = "";
-                        String nombre_temp = "";
-                        String tipo_temp = "";
-                        String apellido_temp = "";
+
 
                         if(parts[j].contains("id: ")){
                             id_temp = parts[j];
-                            id_temp.replace("id: ", "");
+                            id_temp = id_temp.replace("id: ", "");
                         }
                         if(parts[j].contains("correo: ")){
                             correo_temp = parts[j];
-                            correo_temp.replace("correo: ", "");
+                            correo_temp = correo_temp.replace("correo: ", "");
                         }
                         if(parts[j].contains("contrasena: ")){
                             contrasena_temp = parts[j];
-                            contrasena_temp.replace("contrasena: ", "");
+                            contrasena_temp = contrasena_temp.replace("contrasena: ", "");
                         }
                         if(parts[j].contains("nombre: ")){
                             nombre_temp = parts[j];
-                            nombre_temp.replace("nombre: ", "");
+                            nombre_temp = nombre_temp.replace("nombre: ", "");
                         }
                         if(parts[j].contains("tipo: ")){
                             tipo_temp = parts[j];
-                            tipo_temp.replace("tipo: ", "");
+                            tipo_temp = tipo_temp.replace("tipo: ", "");
                         }
                         if(parts[j].contains("apellidos: ")){
                             apellido_temp = parts[j];
-                            apellido_temp.replace("apellidos: ", "");
+                            apellido_temp = apellido_temp.replace("apellidos: ", "");
                         }
 
-                        if(contrasena_temp.trim() == password.getText().toString().trim() && correo_temp.trim() == mail.getText().toString().trim()){
-                            id_seleccionado = id_temp.trim();
-                            correo_seleccionado = correo_temp.trim();
-                            contrasena_seleccionado = contrasena_temp.trim();
-                            nombre_seleccionado = nombre_temp.trim();
-                            tipo_seleccionado = tipo_temp.trim();
-                            apellido_seleccionado = apellido_temp.trim();
-                        }
+                    }
+                    if(contrasena_temp.trim().equals(password.getText().toString().trim()) && correo_temp.trim().equals(mail.getText().toString().trim())){
+                        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), password.getText().toString().trim(), Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                        id_seleccionado = id_temp.trim();
+                        correo_seleccionado = correo_temp.trim();
+                        contrasena_seleccionado = contrasena_temp.trim();
+                        nombre_seleccionado = nombre_temp.trim();
+                        tipo_seleccionado = tipo_temp.trim();
+                        apellido_seleccionado = apellido_temp.trim();
                     }
                 }
 
-                if(id_seleccionado != "" && correo_seleccionado != "" && contrasena_seleccionado != "" && nombre_seleccionado != "" && tipo_seleccionado != "" && apellido_seleccionado != ""){
+                if(!id_seleccionado.equals("") && !correo_seleccionado.equals("") && !contrasena_seleccionado.equals("") && !nombre_seleccionado.equals("") && !tipo_seleccionado.equals("") && !apellido_seleccionado.equals("")){
                     IngresoAplicacion usuario = new IngresoAplicacion(id_seleccionado, correo_seleccionado, contrasena_seleccionado, nombre_seleccionado, apellido_seleccionado, tipo_seleccionado, true);
 
                     guardarPreferencias(usuario);
@@ -103,8 +106,8 @@ public class Login extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "No se encontró al usuario, verifique sus datos", Snackbar.LENGTH_LONG);
-                    snackbar.show();
+                    //Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "No se encontró al usuario, verifique sus datos", Snackbar.LENGTH_LONG);
+                    //snackbar.show();
                 }
             }
             else{

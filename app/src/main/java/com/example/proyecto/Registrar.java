@@ -82,8 +82,8 @@ public class Registrar extends AppCompatActivity {
                 String[] modelos = abrir.split("\n\n");
                 for(int i=0; i<modelos.length; i++){
                     String[] parts = abrir.split("\n");
+                    String id_temp = "";
                     for(int j=0; j<parts.length; j++){
-                        String id_temp = "";
 
                         if(parts[j].contains("id: ")){
                             id_temp = parts[j];
@@ -92,7 +92,6 @@ public class Registrar extends AppCompatActivity {
                                 id = Integer.parseInt(id_temp.trim());
                             }
                         }
-
                     }
                 }
                 id++;

@@ -1,6 +1,6 @@
 package com.example.proyecto;
 
-public class Usuario {
+public class ModeloUsuario {
 
     private int id;
     private String correo;
@@ -10,7 +10,7 @@ public class Usuario {
     private String tipo;
 
 
-    public Usuario(int id, String correo, String contrasena, String nombre, String apellidos, String tipo) {
+    public ModeloUsuario(int id, String correo, String contrasena, String nombre, String apellidos, String tipo) {
         this.id = id;
         this.correo = correo;
         this.contrasena = contrasena;
@@ -19,7 +19,7 @@ public class Usuario {
         this.tipo = tipo;
     }
 
-    public Usuario() {
+    public ModeloUsuario() {
         this.id = 0;
         this.correo = "none";
         this.contrasena = "none";
