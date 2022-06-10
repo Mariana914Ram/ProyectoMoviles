@@ -49,7 +49,7 @@ public class Login extends AppCompatActivity {
 
                 String[] modelos = abrir.split("\n\n");
                 for(int i=0; i<modelos.length; i++){
-                    String[] parts = abrir.split("\n");
+                    String[] parts = modelos[i].split("\n");
                     String id_temp = "";
                     String correo_temp = "";
                     String contrasena_temp = "";
@@ -86,8 +86,6 @@ public class Login extends AppCompatActivity {
 
                     }
                     if(contrasena_temp.trim().equals(password.getText().toString().trim()) && correo_temp.trim().equals(mail.getText().toString().trim())){
-                        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), password.getText().toString().trim(), Snackbar.LENGTH_LONG);
-                        snackbar.show();
                         id_seleccionado = id_temp.trim();
                         correo_seleccionado = correo_temp.trim();
                         contrasena_seleccionado = contrasena_temp.trim();
@@ -106,8 +104,8 @@ public class Login extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    //Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "No se encontró al usuario, verifique sus datos", Snackbar.LENGTH_LONG);
-                    //snackbar.show();
+                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "No se encontró al usuario, verifique sus datos", Snackbar.LENGTH_LONG);
+                    snackbar.show();
                 }
             }
             else{
@@ -166,8 +164,6 @@ public class Login extends AppCompatActivity {
                 //7. Cerrar el flujo del archivo
                 archivoInterno.close();
 
-                //8. Colocar el contenido dentro del componente multilinea
-                Toast.makeText(Login.this, textoLeido, Toast.LENGTH_LONG).show();
                 return textoLeido;
             } catch (IOException e){
                 return "";
@@ -187,5 +183,6 @@ public class Login extends AppCompatActivity {
         }
         return false;
     }
+
 
 }

@@ -3,6 +3,8 @@ package com.example.proyecto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -74,20 +76,23 @@ public class Registrar extends AppCompatActivity {
         if(verificar){
             int id = 0;
             String texto = "";
+            String abrir = abrirArchivo();
+            texto = abrir;
 
-            if(abrirArchivo() == ""){
-                texto = "id: " + id + "\n";
+            if(abrir == ""){
+                texto = texto + "id: " + id + "\n";
             }else {
-                String abrir = abrirArchivo();
                 String[] modelos = abrir.split("\n\n");
                 for(int i=0; i<modelos.length; i++){
-                    String[] parts = abrir.split("\n");
+                    String[] parts = modelos[i].split("\n");
                     String id_temp = "";
+                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), parts[0], Snackbar.LENGTH_LONG);
+                    snackbar.show();
                     for(int j=0; j<parts.length; j++){
 
                         if(parts[j].contains("id: ")){
                             id_temp = parts[j];
-                            id_temp.replace("id: ", "");
+                            id_temp = id_temp.replace("id: ", "");
                             if(id < Integer.parseInt(id_temp.trim())){
                                 id = Integer.parseInt(id_temp.trim());
                             }
@@ -95,8 +100,14 @@ public class Registrar extends AppCompatActivity {
                     }
                 }
                 id++;
-                texto = "id: " + id + "\n";
+                texto = texto + "\nid: " + id + "\n";
+
+                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), id+"", Snackbar.LENGTH_LONG);
+                snackbar.show();
+
             }
+
+            String tipo = "";
 
             texto = texto + "correo: " + correo.getText().toString().trim() + "\n";
             texto = texto + "contrasena: " + password.getText().toString().trim() + "\n";
@@ -104,10 +115,20 @@ public class Registrar extends AppCompatActivity {
             texto = texto + "apellidos: " + apellidos.getText().toString().trim() + "\n";
             if(tipoA.isChecked()){
                 texto = texto + "tipo: admin" + "\n";
+                tipo = "admin";
             }else{
                 texto = texto + "tipo: normal" + "\n";
+                tipo = "normal";
             }
             guardarArchivo(texto);
+
+
+            IngresoAplicacion usuario = new IngresoAplicacion(id+"", correo.getText().toString().trim(), password.getText().toString().trim(), nombre.getText().toString().trim(), apellidos.getText().toString().trim(), tipo, true);
+
+            guardarPreferencias(usuario);
+            Intent intent = new Intent(Registrar.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -153,8 +174,6 @@ public class Registrar extends AppCompatActivity {
                 //7. Cerrar el flujo del archivo
                 archivoInterno.close();
 
-                //8. Colocar el contenido dentro del componente multilinea
-                Toast.makeText(Registrar.this, textoLeido, Toast.LENGTH_LONG).show();
                 return textoLeido;
             } catch (IOException e){
                 return "";
@@ -173,5 +192,21 @@ public class Registrar extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+
+
+
+    private void guardarPreferencias(IngresoAplicacion usr){
+        SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("id", usr.getId());
+        editor.putString("correo", usr.getCorreo());
+        editor.putString("contrasena", usr.getContrasena());
+        editor.putString("nombre", usr.getNombre());
+        editor.putString("apellidos", usr.getApellidos());
+        editor.putString("tipo", usr.getTipo());
+        editor.putBoolean("registrado", usr.isRegistrado());
+        editor.apply();
     }
 }
