@@ -164,6 +164,7 @@ public class Login extends AppCompatActivity {
                 //7. Cerrar el flujo del archivo
                 archivoInterno.close();
 
+                Toast.makeText(Login.this, textoLeido, Toast.LENGTH_LONG).show();
                 return textoLeido;
             } catch (IOException e){
                 return "";
@@ -183,6 +184,5 @@ public class Login extends AppCompatActivity {
         }
         return false;
     }
-
 
 }

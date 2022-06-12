@@ -8,8 +8,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class ActivityMenu extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,8 @@ public class ActivityMenu extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int opc = item.getItemId();
         switch (opc){
+            case R.id.itemAlmacen:
+                vistaAlmacen();
             case R.id.itemCerrar:
                 cerrarSesion();
                 break;
@@ -47,5 +51,14 @@ public class ActivityMenu extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
+    }
+
+
+    public void opcionAlmacen(View view){
+        vistaAlmacen();
+    }
+    public void vistaAlmacen(){
+        Intent intent = new Intent(this, vista_almacen.class);
+        startActivity(intent);
     }
 }
