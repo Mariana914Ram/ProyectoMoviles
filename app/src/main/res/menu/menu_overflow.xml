@@ -12,7 +12,7 @@
         android:title="@string/pendientes" />
     <item
         android:id="@+id/itemUsuario"
-        android:title="@string/agregar_usuario" />
+        android:title="Usuarios" />
     <item
         android:id="@+id/itemCerrar"
         android:title="@string/cerrar_sesion" />

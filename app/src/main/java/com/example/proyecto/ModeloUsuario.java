@@ -8,15 +8,17 @@ public class ModeloUsuario {
     private String nombre;
     private String apellidos;
     private String tipo;
+    private int imagen;
 
 
-    public ModeloUsuario(int id, String correo, String contrasena, String nombre, String apellidos, String tipo) {
+    public ModeloUsuario(int id, String correo, String contrasena, String nombre, String apellidos, String tipo, int imagen) {
         this.id = id;
         this.correo = correo;
         this.contrasena = contrasena;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.tipo = tipo;
+        this.imagen = imagen;
     }
 
     public ModeloUsuario() {
@@ -26,6 +28,7 @@ public class ModeloUsuario {
         this.nombre = "none";
         this.apellidos = "none";
         this.tipo = "normal";
+        this.imagen = 1;
     }
 
     public int getId() {
@@ -74,5 +77,13 @@ public class ModeloUsuario {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public int getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(int imagen) {
+        this.imagen = imagen;
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vista_almacen">
+    tools:context=".vista_usuario">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,31 +13,26 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txtAlmacenes"
+            android:id="@+id/txtUsuarios"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:text="Almacenes"
-            android:textSize="30sp" />
+            android:gravity="center_horizontal"
+            android:text="Usuarios"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <Button
-            android:id="@+id/btnAddAlmacen"
-            android:layout_width="219dp"
+            android:id="@+id/btnAddUsuario"
+            android:layout_width="205dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:backgroundTint="#4CAF50"
-            android:gravity="center"
-            android:onClick="agregarAlmacen"
-            android:text="@string/add_almacen"
-            android:textAlignment="center"
-            android:textColor="#FAF6F6" />
+            android:text="@string/add_usuario" />
 
         <ListView
-            android:id="@+id/lstv_almacenes"
-            android:layout_width="411dp"
+            android:id="@+id/lstv_usuarios"
+            android:layout_width="match_parent"
             android:layout_height="514dp"
             android:layout_marginTop="12dp" />
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

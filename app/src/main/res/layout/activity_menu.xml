@@ -61,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:backgroundTint="#0C67F4"
-                android:text="@string/agregar_usuario"
+                android:onClick="opcionUsuario"
+                android:text="@string/ver_usuarios"
                 android:textColor="#FFFFFF" />
 
             <Button

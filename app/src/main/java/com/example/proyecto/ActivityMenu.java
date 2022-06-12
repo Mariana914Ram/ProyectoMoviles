@@ -33,6 +33,8 @@ public class ActivityMenu extends AppCompatActivity {
         switch (opc){
             case R.id.itemAlmacen:
                 vistaAlmacen();
+            case R.id.itemUsuario:
+                vistaUsuario();
             case R.id.itemCerrar:
                 cerrarSesion();
                 break;
@@ -59,6 +61,15 @@ public class ActivityMenu extends AppCompatActivity {
     }
     public void vistaAlmacen(){
         Intent intent = new Intent(this, vista_almacen.class);
+        startActivity(intent);
+    }
+
+
+    public void opcionUsuario(View view){
+        vistaUsuario();
+    }
+    public void vistaUsuario(){
+        Intent intent = new Intent(this, vista_usuario.class);
         startActivity(intent);
     }
 }

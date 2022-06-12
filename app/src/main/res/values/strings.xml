@@ -1,12 +1,15 @@
 <resources>
+    <string name="app_name">ProyectoFinal</string>
+
     <string name="guardarSesion">Guardar sesión</string>
 
     //Menú
     <string name="ver_almacen">Ver almacén</string>
     <string name="salida_material">Salida de material</string>
     <string name="pendientes">Pendientes</string>
-    <string name="agregar_usuario">Agregar usuario</string>
+    <string name="ver_usuarios">Usuarios</string>
     <string name="cerrar_sesion">Cerrar sesión</string>
 
     <string name="add_almacen">Nuevo Almacén</string>
+    <string name="add_usuario">Nuevo Usuario</string>
 </resources>
