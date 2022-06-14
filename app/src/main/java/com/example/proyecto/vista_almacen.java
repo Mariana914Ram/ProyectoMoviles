@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -50,7 +51,7 @@ public class vista_almacen extends AppCompatActivity {
         else{
 
             String texto = abrirArchivo("archivoAlmacenes.txt");
-            Toast.makeText(vista_almacen.this, texto, Toast.LENGTH_LONG).show();
+            //Toast.makeText(vista_almacen.this, texto, Toast.LENGTH_LONG).show();
             if(texto == ""){
                 //Ir a vista de que no existe el almacén
             }else {
@@ -110,105 +111,225 @@ public class vista_almacen extends AppCompatActivity {
                     ListViewAlmacen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            ModeloAlmacen c = list.get(i);
-                            Toast.makeText(getBaseContext(), c.getNombre(), Toast.LENGTH_SHORT).show();
+                            int viewId = view.getId();
+                            ModeloAlmacen c;
+
+                            switch (viewId){
+                                case R.id.ibtnEditar:
+                                    c = list.get(i);
+                                    Toast.makeText(getBaseContext(), c.getNombre(), Toast.LENGTH_SHORT).show();
 
 
-                            AlertDialog.Builder mydialog = new AlertDialog.Builder(vista_almacen.this);
-                            mydialog.setTitle("Editar almacén "+ c.getNombre());
+                                    AlertDialog.Builder mydialog = new AlertDialog.Builder(vista_almacen.this);
+                                    mydialog.setTitle("Editar almacén "+ c.getNombre());
 
-                            final EditText almacenInput = new EditText(vista_almacen.this);
-                            almacenInput.setInputType(InputType.TYPE_CLASS_TEXT);
-                            almacenInput.setWidth(1000);
-                            almacenInput.setText(c.getNombre());
-                            final LinearLayout layout = new LinearLayout(vista_almacen.this);
-                            layout.setPadding(40, 20, 40, 0);
-                            layout.addView(almacenInput);
-                            mydialog.setView(layout);
+                                    final EditText almacenInput = new EditText(vista_almacen.this);
+                                    almacenInput.setInputType(InputType.TYPE_CLASS_TEXT);
+                                    almacenInput.setWidth(1000);
+                                    almacenInput.setText(c.getNombre());
+                                    LinearLayout layout = new LinearLayout(vista_almacen.this);
+                                    layout.setPadding(40, 20, 40, 0);
+                                    layout.addView(almacenInput);
+                                    mydialog.setView(layout);
 
-                            mydialog.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    textoModal = almacenInput.getText().toString();
-                                    if(textoModal.equals("")){
-                                        dialogInterface.cancel();
-                                        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Debes escribir un nombre para el almacén", Snackbar.LENGTH_LONG);
-                                        snackbar.show();
-                                    }
-                                    else{
-                                        boolean validar = true;
-                                        String texto = "";
-                                        String abrir = abrirArchivo("archivoAlmacenes.txt");
-                                        if(abrir == ""){
-                                            Toast.makeText(vista_almacen.this, "Hubo un error, intente de nuevo", Toast.LENGTH_LONG).show();
-                                        }else {
-                                            String[] modelos = abrir.split("\n\n");
-                                            for(int k=0; k<modelos.length; k++){
-                                                String[] parts = modelos[k].split("\n");
-                                                for(int j=0; j<parts.length; j++){
+                                    mydialog.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            textoModal = almacenInput.getText().toString();
+                                            if(textoModal.equals("")){
+                                                dialogInterface.cancel();
+                                                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Debes escribir un nombre para el almacén", Snackbar.LENGTH_LONG);
+                                                snackbar.show();
+                                            }
+                                            else{
+                                                boolean validar = true;
+                                                String texto = "";
+                                                String abrir = abrirArchivo("archivoAlmacenes.txt");
+                                                if(abrir == ""){
+                                                    Toast.makeText(vista_almacen.this, "Hubo un error, intente de nuevo", Toast.LENGTH_LONG).show();
+                                                }else {
+                                                    String[] modelos = abrir.split("\n\n");
+                                                    for(int k=0; k<modelos.length; k++){
+                                                        String[] parts = modelos[k].split("\n");
+                                                        for(int j=0; j<parts.length; j++){
 
-                                                    if(parts[j].contains("nombre: ")){
-                                                        String nombre_temp = parts[j];
-                                                        nombre_temp = nombre_temp.replace("nombre: ", "");
-                                                        if(!nombre_temp.equals(c.getNombre()) && nombre_temp.equals(textoModal)){
-                                                            validar = false;
+                                                            if(parts[j].contains("nombre: ")){
+                                                                String nombre_temp = parts[j];
+                                                                nombre_temp = nombre_temp.replace("nombre: ", "");
+                                                                if(!nombre_temp.equals(c.getNombre()) && nombre_temp.equals(textoModal)){
+                                                                    validar = false;
+                                                                }
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            }
 
-                                            if(validar){
+                                                    if(validar){
+                                                        for(int k=0; k<modelos.length; k++){
+                                                            String[] parts = modelos[k].split("\n");
+                                                            for(int j=0; j<parts.length; j++){
+
+                                                                if(parts[j].contains("id: ")){
+                                                                    if(k == 0){
+                                                                        texto = texto + parts[j] + "\n";
+                                                                    }
+                                                                    else{
+                                                                        texto = texto + "\n" + parts[j] + "\n";
+                                                                    }
+                                                                }
+                                                                if(parts[j].contains("nombre: ")){
+                                                                    String nombre_temp = parts[j];
+                                                                    nombre_temp = nombre_temp.replace("nombre: ", "");
+                                                                    if(nombre_temp.equals(c.getNombre())){
+                                                                        texto = texto + "nombre: " + textoModal + "\n";
+                                                                    }
+                                                                    else{
+                                                                        texto = texto + parts[j] + "\n";
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        guardarArchivo(texto, "archivoAlmacenes.txt");
+
+                                                        Intent intent = new Intent(vista_almacen.this, vista_almacen.class);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    }
+                                                    else{
+                                                        dialogInterface.cancel();
+
+                                                        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "No pueden repetirse los nombres de los almacenes", Snackbar.LENGTH_LONG);
+                                                        snackbar.show();
+                                                    }
+                                                }
+
+                                            }
+                                        }
+                                    });
+
+                                    mydialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                                    mydialog.show();
+                                    break;
+                                case R.id.ibtnEliminar:
+                                    c = list.get(i);
+
+                                    mydialog = new AlertDialog.Builder(vista_almacen.this);
+                                    mydialog.setTitle("Eliminar almacén "+ c.getNombre());
+
+                                    final TextView almacenText = new TextView(vista_almacen.this);
+                                    almacenText.setWidth(1000);
+                                    almacenText.setText("¿Estás seguro de eliminar este almacén?");
+                                    layout = new LinearLayout(vista_almacen.this);
+                                    layout.setPadding(40, 20, 40, 0);
+                                    layout.addView(almacenText);
+                                    mydialog.setView(layout);
+
+                                    mydialog.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                                            boolean validar = true;
+                                            String texto = "";
+                                            String abrir = abrirArchivo("archivoAlmacenes.txt");
+                                            if(abrir == ""){
+                                                Toast.makeText(vista_almacen.this, "Hubo un error, intente de nuevo", Toast.LENGTH_LONG).show();
+                                            }else {
+                                                String[] modelos = abrir.split("\n\n");
                                                 for(int k=0; k<modelos.length; k++){
+                                                    validar = true;
                                                     String[] parts = modelos[k].split("\n");
+                                                    String textoTemporal = "";
                                                     for(int j=0; j<parts.length; j++){
 
                                                         if(parts[j].contains("id: ")){
+                                                            String id_temp = parts[j];
+                                                            id_temp = id_temp.replace("id: ", "");
+                                                            if(id_temp.equals(c.getId()+"")){
+                                                                validar = false;
+                                                            }
+                                                        }
+                                                        if(parts[j].contains("id: ")){
                                                             if(k == 0){
-                                                                texto = texto + parts[j] + "\n";
+                                                                textoTemporal = textoTemporal + parts[j] + "\n";
                                                             }
                                                             else{
-                                                                texto = texto + "\n" + parts[j] + "\n";
+                                                                textoTemporal = textoTemporal + "\n" + parts[j] + "\n";
                                                             }
                                                         }
-                                                        if(parts[j].contains("nombre: ")){
-                                                            String nombre_temp = parts[j];
-                                                            nombre_temp = nombre_temp.replace("nombre: ", "");
-                                                            if(nombre_temp.equals(c.getNombre())){
-                                                                texto = texto + "nombre: " + textoModal + "\n";
-                                                            }
-                                                            else{
-                                                                texto = texto + parts[j] + "\n";
-                                                            }
+                                                        else{
+                                                            textoTemporal = textoTemporal + parts[j] + "\n";
                                                         }
+                                                    }
+                                                    if(validar){
+                                                        texto = texto + textoTemporal;
                                                     }
                                                 }
                                                 guardarArchivo(texto, "archivoAlmacenes.txt");
+
+                                                validar = true;
+                                                texto = "";
+                                                abrir = abrirArchivo("archivoAlmacenesUsuarios.txt");
+                                                if(abrir == ""){
+                                                    Toast.makeText(vista_almacen.this, "Hubo un error, intente de nuevo", Toast.LENGTH_LONG).show();
+                                                }else {
+                                                    modelos = abrir.split("\n\n");
+                                                    for(int k=0; k<modelos.length; k++){
+                                                        validar = true;
+                                                        String[] parts = modelos[k].split("\n");
+                                                        String textoTemporal = "";
+                                                        for(int j=0; j<parts.length; j++){
+
+                                                            if(parts[j].contains("idAlmacen: ")){
+                                                                String idAlmacen_temp = parts[j];
+                                                                idAlmacen_temp = idAlmacen_temp.replace("idAlmacen: ", "");
+                                                                if(idAlmacen_temp.equals(c.getId())){
+                                                                    validar = false;
+                                                                }
+                                                            }
+                                                            if(parts[j].contains("id: ")){
+                                                                if(k == 0){
+                                                                    textoTemporal = textoTemporal + parts[j] + "\n";
+                                                                }
+                                                                else{
+                                                                    textoTemporal = textoTemporal + "\n" + parts[j] + "\n";
+                                                                }
+                                                            }
+                                                            else{
+                                                                textoTemporal = textoTemporal + parts[j] + "\n";
+                                                            }
+                                                        }
+
+                                                        if(validar){
+                                                            texto = texto + textoTemporal;
+                                                        }
+                                                    }
+                                                    guardarArchivo(texto, "archivoAlmacenesUsuarios.txt");
+                                                }
+
 
                                                 Intent intent = new Intent(vista_almacen.this, vista_almacen.class);
                                                 startActivity(intent);
                                                 finish();
                                             }
-                                            else{
-                                                dialogInterface.cancel();
-
-                                                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "No pueden repetirse los nombres de los almacenes", Snackbar.LENGTH_LONG);
-                                                snackbar.show();
-                                            }
                                         }
+                                    });
 
-                                    }
-                                }
-                            });
-
-                            mydialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    dialogInterface.cancel();
-                                }
-                            });
-                            mydialog.show();
+                                    mydialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                                    mydialog.show();
+                                    break;
+                            }
                         }
                     });
+
                 }
                 else{
                     //Vista de Benites

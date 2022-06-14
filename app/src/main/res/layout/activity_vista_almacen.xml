@@ -23,13 +23,13 @@
 
         <Button
             android:id="@+id/btnAddAlmacen"
-            android:layout_width="219dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:backgroundTint="#4CAF50"
             android:gravity="center"
             android:onClick="agregarAlmacen"
-            android:text="@string/add_almacen"
+            android:text="+ Almacén"
             android:textAlignment="center"
             android:textColor="#FAF6F6" />
 
@@ -37,7 +37,11 @@
             android:id="@+id/lstv_almacenes"
             android:layout_width="411dp"
             android:layout_height="514dp"
-            android:layout_marginTop="12dp" />
+            android:layout_marginTop="12dp"
+            android:headerDividersEnabled="true"
+            android:isScrollContainer="true"
+            android:nestedScrollingEnabled="true"
+            android:clickable="true" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
