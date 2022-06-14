@@ -29,6 +29,9 @@
             android:name=".Editar_usuario"
             android:exported="false" />
         <activity
+            android:name=".AgregarUsuario"
+            android:exported="false" />
+        <activity
             android:name=".Peticion"
             android:exported="false" />
         <activity
