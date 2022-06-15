@@ -49,7 +49,6 @@ public class AgregarUsuario extends AppCompatActivity {
         String texto = abrirArchivo("archivoAlmacenes.txt");
         Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
 
-        int contador = 0;
         String cadena = "";
         if(!texto.equals("")){
             String[] almacen = texto.split("\n\n");
@@ -64,16 +63,14 @@ public class AgregarUsuario extends AppCompatActivity {
 
                         cadena = cadena + nombre_temp;
                         if(i+1 != almacen.length){
-                            cadena = cadena + "...";
+                            cadena = cadena + ", ";
                         }
-                        contador++;
                     }
                 }
             }
         }
 
-        almacenArray = cadena.split("...");
-        Toast.makeText(this, almacenArray[0]+"", Toast.LENGTH_SHORT).show();
+        almacenArray = cadena.split(", ");
 
 
         selectAlmacen = new boolean[almacenArray.length];

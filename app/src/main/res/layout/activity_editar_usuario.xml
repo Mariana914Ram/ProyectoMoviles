@@ -2,55 +2,177 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cbxCambiarPassword"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Editar_usuario">
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Usuarios"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.215"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/et_codigoSuser"
-        android:layout_width="277dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:hint="Codigo de super usuario"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.395"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_agregar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="28dp"
-        android:backgroundTint="#0C67F4"
-        android:text="Agregar "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_codigoSuser" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Nuevo usuario"
+                android:textAlignment="center"
+                android:textSize="34sp" />
 
-    <Button
-        android:id="@+id/btn_eliminar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="112dp"
-        android:backgroundTint="#0C67F4"
-        android:text="Eliminar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_codigoSuser"
-        app:strokeColor="#E1E1E1" />
+            <EditText
+                android:id="@+id/et_nombre"
+                android:layout_width="306dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="156dp"
+                android:ems="10"
+                android:hint="Nombre"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_apellidos"
+                android:layout_width="306dp"
+                android:layout_height="54dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="156dp"
+                android:ems="10"
+                android:hint="Apellidos"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_correoGuardar"
+                android:layout_width="308dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="156dp"
+                android:ems="10"
+                android:hint="Correo"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="187dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="300dp"
+                android:text="Tipo de usuario"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cbxAdmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="31dp"
+                    android:text="Administrador" />
+
+                <CheckBox
+                    android:id="@+id/cbxNormal"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="143dp"
+                    android:text="Normal" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvAlmacen"
+                android:layout_width="310dp"
+                android:layout_height="46dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="300dp"
+                android:layout_marginBottom="30dp"
+                android:background="@android:drawable/editbox_background"
+                android:drawableEnd="@android:drawable/arrow_down_float"
+                android:drawablePadding="16dp"
+                android:hint="Selecciona sus almacenes"
+                android:padding="12dp"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/cbxCambiarPass"
+                android:layout_width="312dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:text="@string/cambiar_password"
+                tools:text="@string/cambiar_password" />
+
+            <LinearLayout
+                android:id="@+id/layoutPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_contraGuardar"
+                    android:layout_width="174dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="15dp"
+                    android:ems="10"
+                    android:hint="Contraseña"
+                    android:inputType="textPassword" />
+
+                <EditText
+                    android:id="@+id/et_confirmarContra"
+                    android:layout_width="167dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="156dp"
+                    android:ems="10"
+                    android:hint="Repetir contraseña"
+                    android:inputType="textPassword" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:paddingBottom="30dp">
+
+                <Button
+                    android:id="@+id/btnRegistrarU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="44dp"
+                    android:layout_marginRight="20dp"
+                    android:backgroundTint="#0C67F4"
+                    android:onClick="guardarUsuario"
+                    android:text="Actualizar" />
+
+                <Button
+                    android:id="@+id/btnCancelarU"
+                    android:layout_width="132dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="44dp"
+                    android:backgroundTint="#0C67F4"
+                    android:onClick="cancelar"
+                    android:text="Cancelar" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

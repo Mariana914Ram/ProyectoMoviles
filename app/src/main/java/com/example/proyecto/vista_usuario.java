@@ -46,6 +46,7 @@ public class vista_usuario extends AppCompatActivity {
                 String correo_temp = "";
                 String nombre_temp = "";
                 String apellidos_temp = "";
+                String tipo_temp = "";
                 for(int j=0; j<parteUsuario.length; j++){
 
 
@@ -65,10 +66,14 @@ public class vista_usuario extends AppCompatActivity {
                         apellidos_temp = parteUsuario[j];
                         apellidos_temp = apellidos_temp.replace("apellidos: ", "");
                     }
+                    if(parteUsuario[j].contains("tipo: ")){
+                        tipo_temp = parteUsuario[j];
+                        tipo_temp = tipo_temp.replace("tipo: ", "");
+                    }
 
                 }
 
-                list.add(new ModeloUsuario(Integer.parseInt(id_temp), correo_temp, "", nombre_temp, apellidos_temp, "", R.drawable.almacen));
+                list.add(new ModeloUsuario(Integer.parseInt(id_temp), correo_temp, "", nombre_temp, apellidos_temp, tipo_temp, R.drawable.almacen));
                 contador++;
             }
 

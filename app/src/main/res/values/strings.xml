@@ -12,4 +12,5 @@
 
     <string name="add_almacen">Nuevo Almacén</string>
     <string name="add_usuario">Nuevo Usuario</string>
+    <string name="cambiar_password">Cambiar contraseña</string>
 </resources>
