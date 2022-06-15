@@ -23,16 +23,21 @@
 
         <Button
             android:id="@+id/btnAddUsuario"
-            android:layout_width="205dp"
+            android:layout_width="154dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:backgroundTint="#4CAF50"
-            android:text="@string/add_usuario" />
+            android:onClick="registrarUsuario"
+            android:text="+ Usuario" />
 
         <ListView
             android:id="@+id/lstv_usuarios"
             android:layout_width="match_parent"
-            android:layout_height="514dp"
-            android:layout_marginTop="12dp" />
+            android:layout_height="502dp"
+            android:layout_marginTop="12dp"
+            android:clickable="true"
+            android:headerDividersEnabled="true"
+            android:isScrollContainer="true"
+            android:nestedScrollingEnabled="true" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

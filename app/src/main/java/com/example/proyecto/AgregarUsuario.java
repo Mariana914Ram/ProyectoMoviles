@@ -1,3 +1,5 @@
+package com.example.proyecto;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -62,7 +64,7 @@ public class AgregarUsuario extends AppCompatActivity {
 
                         cadena = cadena + nombre_temp;
                         if(i+1 != almacen.length){
-                            cadena = cadena + " ";
+                            cadena = cadena + "...";
                         }
                         contador++;
                     }
@@ -70,7 +72,7 @@ public class AgregarUsuario extends AppCompatActivity {
             }
         }
 
-        almacenArray = cadena.split(" ");
+        almacenArray = cadena.split("...");
         Toast.makeText(this, almacenArray[0]+"", Toast.LENGTH_SHORT).show();
 
 
@@ -179,16 +181,21 @@ public class AgregarUsuario extends AppCompatActivity {
             snackbar.show();
             verificar = false;
         }
+        if(tvAlmacen.getText().equals("")){
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Debes seleccionar al menos un almacén", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            verificar = false;
+        }
 
 
         if(verificar){
-            int id = 0;
+            int idU = 0;
             String texto = "";
             String abrir = abrirArchivo("archivoUsuarios.txt");
             texto = abrir;
 
             if(abrir == ""){
-                texto = texto + "id: " + id + "\n";
+                texto = texto + "id: " + idU + "\n";
             }else {
                 String[] modelos = abrir.split("\n\n");
                 for(int i=0; i<modelos.length; i++){
@@ -201,20 +208,17 @@ public class AgregarUsuario extends AppCompatActivity {
                         if(parts[j].contains("id: ")){
                             id_temp = parts[j];
                             id_temp = id_temp.replace("id: ", "");
-                            if(id < Integer.parseInt(id_temp.trim())){
-                                id = Integer.parseInt(id_temp.trim());
+                            if(idU < Integer.parseInt(id_temp.trim())){
+                                idU = Integer.parseInt(id_temp.trim());
                             }
                         }
                     }
                 }
-                id++;
-                texto = texto + "\nid: " + id + "\n";
-
-                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), id+"", Snackbar.LENGTH_LONG);
-                snackbar.show();
+                idU++;
+                texto = texto + "\nid: " + idU + "\n";
 
             }
-            
+
             texto = texto + "correo: " + correo.getText().toString().trim() + "\n";
             texto = texto + "contrasena: " + password.getText().toString().trim() + "\n";
             texto = texto + "nombre: " + nombre.getText().toString().trim() + "\n";
@@ -224,7 +228,78 @@ public class AgregarUsuario extends AppCompatActivity {
             }else{
                 texto = texto + "tipo: normal" + "\n";
             }
-            guardarArchivo(texto);
+            guardarArchivo(texto, "archivoUsuarios.txt");
+
+
+
+
+            //Relacionar usuario a almacén
+            String[] almacenesSeleccionados = tvAlmacen.getText().toString().split(", ");
+            for(int k=0; k<almacenesSeleccionados.length; k++){
+                texto = "";
+                abrir = abrirArchivo("archivoAlmacenesUsuarios.txt");
+                texto = abrir;
+                int idAU=0;
+
+                if(abrir == ""){
+                    texto = texto + "id: " + idAU + "\n";
+                }else {
+                    String[] modelos = abrir.split("\n\n");
+                    for(int i=0; i<modelos.length; i++){
+                        String[] parts = modelos[i].split("\n");
+                        String id_temp = "";
+                        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), parts[0], Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                        for(int j=0; j<parts.length; j++){
+
+                            if(parts[j].contains("id: ")){
+                                id_temp = parts[j];
+                                id_temp = id_temp.replace("id: ", "");
+                                if(idAU < Integer.parseInt(id_temp.trim())){
+                                    idAU = Integer.parseInt(id_temp.trim());
+                                }
+                            }
+                        }
+                    }
+                    idAU++;
+                    texto = texto + "\nid: " + idAU + "\n";
+                }
+
+
+                abrir = abrirArchivo("archivoAlmacenes.txt");
+                boolean almacenEncontrado = false;
+                String id_almacenSeleccionado = "";
+                if(!abrir.equals("")){
+                    String[] modelos = abrir.split("\n\n");
+                    for(int i=0; i<modelos.length; i++){
+                        String[] parts = modelos[i].split("\n");
+                        String id_temp = "";
+                        for(int j=0; j<parts.length; j++){
+
+                            if(parts[j].contains("id: ")){
+                                id_temp = parts[j];
+                                id_temp = id_temp.replace("id: ", "");
+                            }
+                            if(parts[j].contains("nombre: ")){
+                                String nombre_temp = parts[j];
+                                nombre_temp = nombre_temp.replace("nombre: ", "");
+                                if(nombre_temp.equals(almacenesSeleccionados[k])){
+                                    almacenEncontrado = true;
+                                }
+                            }
+                        }
+
+                        if(almacenEncontrado){
+                            almacenEncontrado = false;
+                            id_almacenSeleccionado = id_temp;
+                        }
+                    }
+                }
+
+                texto = texto + "idUsuario: " + idU + "\n";
+                texto = texto + "idAlmacen: " + id_almacenSeleccionado + "\n";
+                guardarArchivo(texto, "archivoAlmacenesUsuarios.txt");
+            }
 
 
             Intent intent = new Intent(AgregarUsuario.this, vista_usuario.class);
@@ -235,9 +310,9 @@ public class AgregarUsuario extends AppCompatActivity {
 
 
 
-    private void guardarArchivo(String texto){
+    private void guardarArchivo(String texto, String file){
         try {
-            OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput("archivoUsuarios.txt", Activity.MODE_PRIVATE));
+            OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput(file, Activity.MODE_PRIVATE));
             archivo.write(texto);
             archivo.flush();
             archivo.close();
@@ -294,5 +369,5 @@ public class AgregarUsuario extends AppCompatActivity {
         }
         return false;
     }
-    
+
 }

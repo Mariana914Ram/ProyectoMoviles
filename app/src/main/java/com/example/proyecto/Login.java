@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -120,6 +118,7 @@ public class Login extends AppCompatActivity {
     public void registrarU(View view){
         Intent intent = new Intent(this, Registrar.class);
         startActivity(intent);
+        finish();
     }
 
 

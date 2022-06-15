@@ -17,9 +17,6 @@
             android:name=".vista_usuario"
             android:exported="false" />
         <activity
-            android:name=".eliminar"
-            android:exported="false" />
-        <activity
             android:name=".Registrar"
             android:exported="false" />
         <activity

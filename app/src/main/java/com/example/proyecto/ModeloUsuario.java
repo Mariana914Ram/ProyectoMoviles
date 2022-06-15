@@ -1,6 +1,8 @@
 package com.example.proyecto;
 
-public class ModeloUsuario {
+import java.io.Serializable;
+
+public class ModeloUsuario implements Serializable {
 
     private int id;
     private String correo;

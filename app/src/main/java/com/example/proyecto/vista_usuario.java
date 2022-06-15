@@ -1,18 +1,23 @@
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,8 +80,129 @@ public class vista_usuario extends AppCompatActivity {
                 ListViewUsuario.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        ModeloUsuario c = list.get(i);
-                        Toast.makeText(getBaseContext(), c.getNombre(), Toast.LENGTH_SHORT).show();
+                        int viewId = view.getId();
+                        ModeloUsuario c;
+
+                        switch (viewId){
+                            case R.id.ibtnEditar:
+                                c = list.get(i);
+                                Intent intent = new Intent(vista_usuario.this, Editar_usuario.class);
+                                intent.putExtra("usuarioInfo", c);
+                                startActivity(intent);
+
+                                break;
+                            case R.id.ibtnEliminar:
+                                c = list.get(i);
+
+                                AlertDialog.Builder mydialog = new AlertDialog.Builder(vista_usuario.this);
+                                mydialog.setTitle("Eliminar usuario "+ c.getNombre() + " " + c.getApellidos());
+
+                                final TextView almacenText = new TextView(vista_usuario.this);
+                                almacenText.setWidth(1000);
+                                almacenText.setText("¿Estás seguro de eliminar este almacén?");
+                                LinearLayout layout = new LinearLayout(vista_usuario.this);
+                                layout.setPadding(40, 20, 40, 0);
+                                layout.addView(almacenText);
+                                mydialog.setView(layout);
+
+                                mydialog.setPositiveButton("Eliminar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                        boolean validar = true;
+                                        String texto = "";
+                                        String abrir = abrirArchivo("archivoUsuarios.txt");
+                                        if(abrir == ""){
+                                            Toast.makeText(vista_usuario.this, "Hubo un error, intente de nuevo", Toast.LENGTH_LONG).show();
+                                        }else {
+                                            String[] modelos = abrir.split("\n\n");
+                                            for(int k=0; k<modelos.length; k++){
+                                                validar = true;
+                                                String[] parts = modelos[k].split("\n");
+                                                String textoTemporal = "";
+                                                for(int j=0; j<parts.length; j++){
+
+                                                    if(parts[j].contains("id: ")){
+                                                        String id_temp = parts[j];
+                                                        id_temp = id_temp.replace("id: ", "");
+                                                        if(id_temp.equals(c.getId()+"")){
+                                                            validar = false;
+                                                        }
+                                                    }
+                                                    if(parts[j].contains("id: ")){
+                                                        if(k == 0){
+                                                            textoTemporal = textoTemporal + parts[j] + "\n";
+                                                        }
+                                                        else{
+                                                            textoTemporal = textoTemporal + "\n" + parts[j] + "\n";
+                                                        }
+                                                    }
+                                                    else{
+                                                        textoTemporal = textoTemporal + parts[j] + "\n";
+                                                    }
+                                                }
+                                                if(validar){
+                                                    texto = texto + textoTemporal;
+                                                }
+                                            }
+                                            guardarArchivo(texto, "archivoUsuarios.txt");
+
+                                            validar = true;
+                                            texto = "";
+                                            abrir = abrirArchivo("archivoAlmacenesUsuarios.txt");
+                                            if(abrir == ""){
+                                                Toast.makeText(vista_usuario.this, "Hubo un error, intente de nuevo", Toast.LENGTH_LONG).show();
+                                            }else {
+                                                modelos = abrir.split("\n\n");
+                                                for(int k=0; k<modelos.length; k++){
+                                                    validar = true;
+                                                    String[] parts = modelos[k].split("\n");
+                                                    String textoTemporal = "";
+                                                    for(int j=0; j<parts.length; j++){
+
+                                                        if(parts[j].contains("idUsuario: ")){
+                                                            String idAlmacen_temp = parts[j];
+                                                            idAlmacen_temp = idAlmacen_temp.replace("idUsuario: ", "");
+                                                            if(idAlmacen_temp.equals(c.getId())){
+                                                                validar = false;
+                                                            }
+                                                        }
+                                                        if(parts[j].contains("id: ")){
+                                                            if(k == 0){
+                                                                textoTemporal = textoTemporal + parts[j] + "\n";
+                                                            }
+                                                            else{
+                                                                textoTemporal = textoTemporal + "\n" + parts[j] + "\n";
+                                                            }
+                                                        }
+                                                        else{
+                                                            textoTemporal = textoTemporal + parts[j] + "\n";
+                                                        }
+                                                    }
+                                                    if(validar){
+                                                        texto = texto + textoTemporal;
+                                                    }
+                                                }
+                                                guardarArchivo(texto, "archivoAlmacenesUsuarios.txt");
+                                            }
+
+
+                                            Intent intent = new Intent(vista_usuario.this, vista_usuario.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    }
+                                });
+
+                                mydialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
+                                mydialog.show();
+                                break;
+                        }
                     }
                 });
             }
@@ -84,10 +210,15 @@ public class vista_usuario extends AppCompatActivity {
                 //Vista de Benites
             }
 
-            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "HOLA!!!!", Snackbar.LENGTH_LONG);
-            snackbar.show();
-
         }
+    }
+
+
+
+    public void registrarUsuario(View view){
+        Intent intent = new Intent(this, AgregarUsuario.class);
+        startActivity(intent);
+        finish();
     }
 
 
@@ -136,5 +267,19 @@ public class vista_usuario extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+
+
+
+    private void guardarArchivo(String texto, String file){
+        try {
+            OutputStreamWriter archivo = new OutputStreamWriter(openFileOutput(file, Activity.MODE_PRIVATE));
+            archivo.write(texto);
+            archivo.flush();
+            archivo.close();
+        } catch (IOException e){
+            Toast.makeText(vista_usuario.this, "Error al escribir en el archivo", Toast.LENGTH_LONG).show();
+        }
     }
 }
