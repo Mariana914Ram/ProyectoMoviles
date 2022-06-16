@@ -5,11 +5,11 @@ public class ModeloProductos {
     private int id;
     private int idAlmacen;
     private String nombre;
-    private String imagen;
+    private int imagen;
     private double precio;
     private int stock;
 
-    public ModeloProductos(int id, int idAlmacen, String nombre, String imagen, double precio, int stock) {
+    public ModeloProductos(int id, int idAlmacen, String nombre, int imagen, double precio, int stock) {
         this.id = id;
         this.idAlmacen = idAlmacen;
         this.nombre = nombre;
@@ -22,7 +22,7 @@ public class ModeloProductos {
         this.id = -1;
         this.idAlmacen = -1;
         this.nombre = "none";
-        this.imagen = "none";
+        this.imagen = -1;
         this.precio = 0.00;
         this.stock = 0;
     }
@@ -51,11 +51,11 @@ public class ModeloProductos {
         this.nombre = nombre;
     }
 
-    public String getImagen() {
+    public int getImagen() {
         return imagen;
     }
 
-    public void setImagen(String imagen) {
+    public void setImagen(int imagen) {
         this.imagen = imagen;
     }
 

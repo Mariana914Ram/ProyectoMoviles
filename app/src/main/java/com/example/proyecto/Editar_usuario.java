@@ -1,9 +1,13 @@
 package com.example.proyecto;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -22,6 +26,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class Editar_usuario extends AppCompatActivity {
 
@@ -32,7 +37,9 @@ public class Editar_usuario extends AppCompatActivity {
     LinearLayout layoutPassword;
     boolean[] selectAlmacen;
     ArrayList<Integer> almacenList = new ArrayList<>();
+    List<ModeloAlmacen> listAlmacen = new ArrayList<>();
     String[] almacenArray;
+    String idUser = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,9 @@ public class Editar_usuario extends AppCompatActivity {
         tvAlmacen = (TextView) findViewById(R.id.tvAlmacen);
         cambiarPass = (CheckBox) findViewById(R.id.cbxCambiarPass);
         layoutPassword = (LinearLayout) findViewById(R.id.layoutPassword);
+
+        SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
+        idUser = preferences.getString("id", "");
 
         password.setVisibility(View.INVISIBLE);
         repetPassword.setVisibility(View.INVISIBLE);
@@ -86,24 +96,28 @@ public class Editar_usuario extends AppCompatActivity {
 
 
         String texto = abrirArchivo("archivoAlmacenes.txt");
-
         String nombreCadena = "";
         if(!texto.equals("")){
             String[] almacen = texto.split("\n\n");
             for(int i=0; i<almacen.length; i++){
                 String[] parteAlmacen = almacen[i].split("\n");
                 String nombre_temp = "";
+                String id_temp = "";
                 for(int j=0; j<parteAlmacen.length; j++) {
 
                     if (parteAlmacen[j].contains("nombre: ")) {
                         nombre_temp = parteAlmacen[j];
                         nombre_temp = nombre_temp.replace("nombre: ", "");
-
-                        nombreCadena = nombreCadena + nombre_temp;
-                        if(i+1 != almacen.length){
-                            nombreCadena = nombreCadena + ", ";
-                        }
                     }
+                    if (parteAlmacen[j].contains("id: ")) {
+                        id_temp = parteAlmacen[j];
+                        id_temp = id_temp.replace("id: ", "");
+                    }
+                }
+                listAlmacen.add(new ModeloAlmacen(Integer.parseInt(id_temp), nombre_temp, 0));
+                nombreCadena = nombreCadena + nombre_temp;
+                if(i+1 != almacen.length){
+                    nombreCadena = nombreCadena + ", ";
                 }
             }
         }
@@ -177,37 +191,38 @@ public class Editar_usuario extends AppCompatActivity {
             }
         });
 
-
-        /*for(int i=0; i<almacenArray.length; i++){
+        String itemsSeleccionados = "";
+        for(int i=0; i<listAlmacen.size(); i++){
             texto = abrirArchivo("archivoAlmacenesUsuarios.txt");
             if(!texto.equals("")){
                 String[] almacenUsuarios = texto.split("\n\n");
                 for(int k=0; k<almacenUsuarios.length; k++){
                     String[] parteAlmacen = almacenUsuarios[k].split("\n");
                     String idAlmacen_temp = "";
-                    if (parteAlmacen[k].contains("idUsuario: " + usuario.getId()+"")) {
+                    if (almacenUsuarios[k].contains("idUsuario: " + usuario.getId()+"")) {
                         for (int j = 0; j < parteAlmacen.length; j++) {
 
                             if (parteAlmacen[j].contains("idAlmacen: ")) {
                                 idAlmacen_temp = parteAlmacen[j];
                                 idAlmacen_temp = idAlmacen_temp.replace("idAlmacen: ", "");
 
-                                String abrir = abrirArchivo("archivoAlmacenes.txt");
-                                if (!abrir.equals("")) {
-                                    String[] almacen = abrir.split("\n\n");
-                                    for (int l = 0; l < almacen.length; l++) {
-                                        if (almacen[l].contains("id: " + idAlmacen_temp) && almacen[l].contains("nombre: " + almacenArray[i])) {
-                                            almacenList.add(l);
-                                            Collections.sort(almacenList);
-                                        }
-                                    }
+                                if(idAlmacen_temp.equals(listAlmacen.get(i).getId()+"")){
+                                    itemsSeleccionados = itemsSeleccionados + listAlmacen.get(i).getNombre() + ", ";
+                                    selectAlmacen[i] = true;
+                                    almacenList.add(i);
+                                    Collections.sort(almacenList);
                                 }
                             }
                         }
                     }
                 }
             }
-        }*/
+        }
+        itemsSeleccionados = itemsSeleccionados + "mm";
+        itemsSeleccionados = itemsSeleccionados.replace(", mm", "");
+        tvAlmacen.setText(itemsSeleccionados);
+
+
     }
 
 
@@ -233,18 +248,20 @@ public class Editar_usuario extends AppCompatActivity {
             correo.setError("Campo requerido");
             verificar = false;
         }
-        if(password.getText().toString().isEmpty()){
-            password.setError("Campo requerido");
-            verificar = false;
-        }
-        if(repetPassword.getText().toString().isEmpty()){
-            repetPassword.setError("Campo requerido");
-            verificar = false;
-        }
-        if(!password.getText().toString().equals(repetPassword.getText().toString())){
-            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "La contraseña y la confirmación deben ser iguales", Snackbar.LENGTH_LONG);
-            snackbar.show();
-            verificar = false;
+        if(cambiarPass.isChecked()){
+            if(password.getText().toString().isEmpty()){
+                password.setError("Campo requerido");
+                verificar = false;
+            }
+            if(repetPassword.getText().toString().isEmpty()){
+                repetPassword.setError("Campo requerido");
+                verificar = false;
+            }
+            if(!password.getText().toString().equals(repetPassword.getText().toString())){
+                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "La contraseña y la confirmación deben ser iguales", Snackbar.LENGTH_LONG);
+                snackbar.show();
+                verificar = false;
+            }
         }
         if(tvAlmacen.getText().equals("")){
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Debes seleccionar al menos un almacén", Snackbar.LENGTH_LONG);
@@ -254,46 +271,101 @@ public class Editar_usuario extends AppCompatActivity {
 
 
         if(verificar){
-            int idU = 0;
             String texto = "";
             String abrir = abrirArchivo("archivoUsuarios.txt");
-            texto = abrir;
+            verificar = false;
 
-            if(abrir == ""){
-                texto = texto + "id: " + idU + "\n";
-            }else {
+            if(!abrir.equals("")){
                 String[] modelos = abrir.split("\n\n");
                 for(int i=0; i<modelos.length; i++){
                     String[] parts = modelos[i].split("\n");
                     String id_temp = "";
-                    Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), parts[0], Snackbar.LENGTH_LONG);
-                    snackbar.show();
+                    if(i != 0){
+                        texto = texto + "\n";
+                    }
                     for(int j=0; j<parts.length; j++){
 
                         if(parts[j].contains("id: ")){
                             id_temp = parts[j];
                             id_temp = id_temp.replace("id: ", "");
-                            if(idU < Integer.parseInt(id_temp.trim())){
-                                idU = Integer.parseInt(id_temp.trim());
+                            if(id_temp.equals(usuario.getId()+"")){
+                                verificar = true;
                             }
                         }
+                        if(verificar){
+                            if(parts[j].contains("id: ")){
+                                texto = texto + parts[j] + "\n";
+                            }
+                            if(parts[j].contains("correo: ")){
+                                texto = texto + "correo: " + correo.getText().toString().trim() + "\n";
+                            }
+                            if(parts[j].contains("contrasena: ")){
+                                if(cambiarPass.isChecked()){
+                                    texto = texto + "contrasena: " + password.getText().toString().trim() + "\n";
+                                }
+                                else{
+                                    texto = texto + parts[j] + "\n";
+                                }
+                            }
+                            if(parts[j].contains("nombre: ")){
+                                texto = texto + "nombre: " + nombre.getText().toString().trim() + "\n";
+                            }
+                            if(parts[j].contains("apellidos: ")){
+                                texto = texto + "apellidos: " + apellidos.getText().toString().trim() + "\n";
+                            }
+                            if(parts[j].contains("tipo: ")){
+                                if(tipoA.isChecked()){
+                                    texto = texto + "tipo: admin" + "\n";
+                                }else{
+                                    texto = texto + "tipo: normal" + "\n";
+                                }
+                            }
+                        }
+                        else{
+                            texto = texto + parts[j] + "\n";
+                        }
                     }
+                    verificar = false;
                 }
-                idU++;
-                texto = texto + "\nid: " + idU + "\n";
 
-            }
-
-            texto = texto + "correo: " + correo.getText().toString().trim() + "\n";
-            texto = texto + "contrasena: " + password.getText().toString().trim() + "\n";
-            texto = texto + "nombre: " + nombre.getText().toString().trim() + "\n";
-            texto = texto + "apellidos: " + apellidos.getText().toString().trim() + "\n";
-            if(tipoA.isChecked()){
-                texto = texto + "tipo: admin" + "\n";
-            }else{
-                texto = texto + "tipo: normal" + "\n";
             }
             guardarArchivo(texto, "archivoUsuarios.txt");
+
+
+
+
+            //Eliminar
+            abrir = abrirArchivo("archivoAlmacenesUsuarios.txt");
+            texto = "";
+            verificar = true;
+            if(!abrir.equals("")){
+                String[] modelos = abrir.split("\n\n");
+                for(int i=0; i<modelos.length; i++){
+                    String[] parts = modelos[i].split("\n");
+                    String idUsuario_temp = "";
+                    String texto_temp = "";
+                    verificar = true;
+                    if(i != 0){
+                        texto = texto + "\n";
+                    }
+                    for(int j=0; j<parts.length; j++){
+
+                        if(parts[j].contains("idUsuario: ")){
+                            idUsuario_temp = parts[j];
+                            idUsuario_temp = idUsuario_temp.replace("idUsuario: ", "");
+
+                            if(idUsuario_temp.equals(usuario.getId()+"")){
+                                verificar = false;
+                            }
+                        }
+                        texto_temp = texto_temp + parts[j] + "\n";
+                    }
+                    if(verificar){
+                        texto = texto + texto_temp;
+                    }
+                }
+            }
+            guardarArchivo(texto, "archivoAlmacenesUsuarios.txt");
 
 
 
@@ -301,7 +373,6 @@ public class Editar_usuario extends AppCompatActivity {
             //Relacionar usuario a almacén
             String[] almacenesSeleccionados = tvAlmacen.getText().toString().split(", ");
             for(int k=0; k<almacenesSeleccionados.length; k++){
-                texto = "";
                 abrir = abrirArchivo("archivoAlmacenesUsuarios.txt");
                 texto = abrir;
                 int idAU=0;
@@ -361,7 +432,7 @@ public class Editar_usuario extends AppCompatActivity {
                     }
                 }
 
-                texto = texto + "idUsuario: " + idU + "\n";
+                texto = texto + "idUsuario: " + usuario.getId()+"" + "\n";
                 texto = texto + "idAlmacen: " + id_almacenSeleccionado + "\n";
                 guardarArchivo(texto, "archivoAlmacenesUsuarios.txt");
             }

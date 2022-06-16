@@ -326,6 +326,17 @@ public class vista_almacen extends AppCompatActivity {
                                     });
                                     mydialog.show();
                                     break;
+
+
+
+
+                                default:
+                                    c = list.get(i);
+                                    Intent intent = new Intent(vista_almacen.this, AlmacenInicio.class);
+                                    intent.putExtra("almacenInfo", c);
+                                    startActivity(intent);
+
+                                    break;
                             }
                         }
                     });

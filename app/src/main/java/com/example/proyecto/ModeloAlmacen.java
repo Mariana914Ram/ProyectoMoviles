@@ -1,6 +1,8 @@
 package com.example.proyecto;
 
-public class ModeloAlmacen {
+import java.io.Serializable;
+
+public class ModeloAlmacen implements Serializable {
 
     private int id;
     private String nombre;
@@ -42,4 +44,3 @@ public class ModeloAlmacen {
         this.imagen = imagen;
     }
 }
-

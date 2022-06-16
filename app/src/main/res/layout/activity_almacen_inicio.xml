@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityMenu">
+    tools:context=".AlmacenInicio">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,62 +18,55 @@
             android:paddingBottom="30dp">
 
             <TextView
-                android:id="@+id/txtTitulo"
+                android:id="@+id/txtTituloAlmacen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:gravity="center_horizontal"
                 android:text="Elige una opcion"
-                android:textColor="@color/naranja"
                 android:textSize="34sp" />
 
-            <Button
-                android:id="@+id/btn_verAlmacen"
-                android:layout_width="217dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="@color/azul_a"
-                android:onClick="opcionAlmacen"
-                android:text="@string/ver_almacen"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF" />
 
             <Button
-                android:id="@+id/btn_pendientes"
+                android:id="@+id/btn_productos"
                 android:layout_width="217dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="@color/azul_a"
-                android:text="@string/pendientes"
+                android:backgroundTint="#0C67F4"
+                android:text="@string/productos"
                 android:textColor="#FFFFFF" />
+
+
+            <Button
+                android:id="@+id/btn_solicitud_productos"
+                android:layout_width="217dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#0C67F4"
+                android:text="@string/solicitud_productos"
+                android:textColor="#FFFFFF" />
+
 
             <Button
                 android:id="@+id/btn_salidaMaterial"
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="@color/azul_a"
+                android:backgroundTint="#0C67F4"
                 android:text="@string/salida_material"
                 android:textColor="#FFFFFF" />
 
-            <Button
-                android:id="@+id/btn_agregarUsuario"
-                android:layout_width="215dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="@color/azul_a"
-                android:onClick="opcionUsuario"
-                android:text="@string/ver_usuarios"
-                android:textColor="#FFFFFF" />
 
             <Button
-                android:id="@+id/btn_cerrarSesion"
-                android:layout_width="215dp"
+                android:id="@+id/btn_pendientes"
+                android:layout_width="217dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                android:backgroundTint="@color/azul_a"
-                android:text="@string/cerrar_sesion"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#0C67F4"
+                android:text="@string/pendientes"
                 android:textColor="#FFFFFF" />
+
+
         </LinearLayout>
     </ScrollView>
 

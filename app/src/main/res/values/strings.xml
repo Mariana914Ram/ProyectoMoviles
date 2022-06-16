@@ -13,4 +13,7 @@
     <string name="add_almacen">Nuevo Almacén</string>
     <string name="add_usuario">Nuevo Usuario</string>
     <string name="cambiar_password">Cambiar contraseña</string>
+
+    <string name="productos">Productos</string>
+    <string name="solicitud_productos">Solicitud de Productos</string>
 </resources>
