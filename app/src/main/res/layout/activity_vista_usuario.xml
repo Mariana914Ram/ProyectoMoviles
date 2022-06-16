@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".vista_usuario">
 
     <LinearLayout
@@ -19,7 +20,8 @@
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:text="Usuarios"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/naranja" />
 
         <Button
             android:id="@+id/btnAddUsuario"
@@ -28,7 +30,8 @@
             android:layout_marginRight="20dp"
             android:backgroundTint="#4CAF50"
             android:onClick="registrarUsuario"
-            android:text="+ Usuario" />
+            android:text="+ Usuario"
+            android:textColor="@color/design_default_color_background" />
 
         <ListView
             android:id="@+id/lstv_usuarios"

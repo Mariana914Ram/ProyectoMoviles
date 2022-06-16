@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:descendantFocusability="blocksDescendants">
+    android:background="@color/background"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/img_Almacen"
@@ -60,8 +61,8 @@
                 android:layout_marginRight="15dp"
                 android:layout_weight="50"
                 android:adjustViewBounds="true"
-                android:focusable="false"
                 android:backgroundTint="#FFFFFF"
+                android:focusable="false"
                 android:paddingLeft="5dp"
                 android:paddingTop="15dp"
                 android:paddingRight="5dp"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".vista_almacen">
 
     <LinearLayout
@@ -19,6 +20,7 @@
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Almacenes"
+            android:textColor="@color/naranja"
             android:textSize="30sp" />
 
         <Button
@@ -38,10 +40,10 @@
             android:layout_width="411dp"
             android:layout_height="514dp"
             android:layout_marginTop="12dp"
+            android:clickable="true"
             android:headerDividersEnabled="true"
             android:isScrollContainer="true"
-            android:nestedScrollingEnabled="true"
-            android:clickable="true" />
+            android:nestedScrollingEnabled="true" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

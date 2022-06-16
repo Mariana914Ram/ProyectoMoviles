@@ -24,6 +24,7 @@
                 android:layout_marginTop="44dp"
                 android:gravity="center_horizontal"
                 android:text="Elige una opcion"
+                android:textColor="@color/naranja"
                 android:textSize="34sp" />
 
             <Button
@@ -31,7 +32,7 @@
                 android:layout_width="217dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
+                android:backgroundTint="@color/azul_a"
                 android:onClick="opcionAlmacen"
                 android:text="@string/ver_almacen"
                 android:textAlignment="center"
@@ -42,7 +43,7 @@
                 android:layout_width="217dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
+                android:backgroundTint="@color/azul_a"
                 android:text="@string/pendientes"
                 android:textColor="#FFFFFF" />
 
@@ -51,7 +52,7 @@
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
+                android:backgroundTint="@color/azul_a"
                 android:text="@string/salida_material"
                 android:textColor="#FFFFFF" />
 
@@ -60,7 +61,7 @@
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
+                android:backgroundTint="@color/azul_a"
                 android:onClick="opcionUsuario"
                 android:text="@string/ver_usuarios"
                 android:textColor="#FFFFFF" />
@@ -70,7 +71,7 @@
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
-                android:backgroundTint="#0C67F4"
+                android:backgroundTint="@color/azul_a"
                 android:text="@string/cerrar_sesion"
                 android:textColor="#FFFFFF" />
         </LinearLayout>

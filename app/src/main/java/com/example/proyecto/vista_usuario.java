@@ -1,3 +1,5 @@
+package com.example.proyecto;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.appcompat.app.AlertDialog;

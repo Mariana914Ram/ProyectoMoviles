@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    android:background="@color/background"
+    android:backgroundTint="@color/background"
+    tools:context=".Login">z
 
     <EditText
         android:id="@+id/et_correo"
@@ -43,6 +45,7 @@
         android:layout_marginTop="44dp"
         android:layout_marginEnd="171dp"
         android:text="Bienvenido"
+        android:textColor="@color/naranja"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,9 +58,10 @@
         android:layout_marginStart="158dp"
         android:layout_marginTop="60dp"
         android:layout_marginEnd="159dp"
-        android:backgroundTint="#0C67F4"
+        android:backgroundTint="@color/azul_a"
         android:onClick="ingresarMenu"
         android:text="Ingresar"
+        android:textColor="@color/design_default_color_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_contra" />
@@ -69,9 +73,10 @@
         android:layout_marginStart="158dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="159dp"
-        android:backgroundTint="#0C67F4"
+        android:backgroundTint="@color/azul_a"
         android:onClick="registrarU"
         android:text="Registrarse"
+        android:textColor="@color/design_default_color_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_ingresar" />
