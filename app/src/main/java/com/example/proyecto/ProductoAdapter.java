@@ -48,7 +48,7 @@ public class ProductoAdapter extends BaseAdapter {
 
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.listview_usuario, viewGroup, false);
+        View itemView = inflater.inflate(R.layout.listview_productos, viewGroup, false);
 
         ModeloProductos c = list.get(i);
 
@@ -64,8 +64,8 @@ public class ProductoAdapter extends BaseAdapter {
 
         nombreProducto.setText(c.getNombre());
         imageProducto.setImageResource(R.drawable.herramientas);
-        precioProducto.setText(c.getPrecio()+"");
-        stockProducto.setText(c.getStock()+"");
+        precioProducto.setText("Precio: $" + c.getPrecio());
+        stockProducto.setText("Cantidad disponible: " + c.getStock()+"");
 
 
         botonEditar.setOnClickListener(new View.OnClickListener() {
