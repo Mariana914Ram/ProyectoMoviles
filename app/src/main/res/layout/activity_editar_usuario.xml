@@ -5,6 +5,7 @@
     android:id="@+id/cbxCambiarPassword"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".Editar_usuario">
 
     <ScrollView
@@ -23,6 +24,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Nuevo usuario"
                 android:textAlignment="center"
+                android:textColor="@color/naranja"
                 android:textSize="34sp" />
 
             <EditText
@@ -163,9 +165,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="44dp"
                     android:layout_marginRight="20dp"
-                    android:backgroundTint="#0C67F4"
+                    android:backgroundTint="@color/azul_a"
                     android:onClick="guardarUsuario"
-                    android:text="Actualizar" />
+                    android:text="Actualizar"
+                    android:textColor="@color/design_default_color_background" />
 
                 <Button
                     android:id="@+id/btnCancelarU"
@@ -173,9 +176,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="44dp"
-                    android:backgroundTint="#0C67F4"
+                    android:backgroundTint="@color/azul_a"
                     android:onClick="cancelar"
-                    android:text="Cancelar" />
+                    android:text="Cancelar"
+                    android:textColor="@color/design_default_color_background" />
             </LinearLayout>
 
         </LinearLayout>

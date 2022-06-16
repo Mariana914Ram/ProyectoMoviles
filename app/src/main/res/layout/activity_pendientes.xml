@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".Pendientes">
 
     <TextView
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Pendientes"
+        android:textColor="@color/naranja"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.171"
@@ -24,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
         android:text="Ultimas salidas de material"
+        android:textColor="@color/naranja"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.409"

@@ -1,4 +1,9 @@
 package com.example.proyecto;
+//<<<<<<< HEAD
+
+import androidx.appcompat.app.AppCompatActivity;
+//=======
+//>>>>>>> b13524f4471237b8bd15fc99fe80b8248536f680
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

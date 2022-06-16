@@ -4,16 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".Registrar">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView2"
@@ -22,6 +24,7 @@
                 android:layout_marginTop="16dp"
                 android:text="Nuevo usuario"
                 android:textAlignment="center"
+                android:textColor="@color/naranja"
                 android:textSize="34sp" />
 
             <EditText
@@ -92,9 +95,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="44dp"
                     android:layout_marginRight="20dp"
-                    android:backgroundTint="#0C67F4"
+                    android:backgroundTint="@color/azul_a"
                     android:onClick="registrarUsuario"
-                    android:text="Registrar" />
+                    android:text="Registrar"
+                    android:textColor="@color/design_default_color_background" />
 
                 <Button
                     android:id="@+id/btnCancelarU"
@@ -102,8 +106,9 @@
                     android:layout_height="49dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="44dp"
-                    android:backgroundTint="#0C67F4"
-                    android:text="Cancelar" />
+                    android:backgroundTint="@color/azul_a"
+                    android:text="Cancelar"
+                    android:textColor="@color/design_default_color_background" />
             </LinearLayout>
 
         </LinearLayout>
