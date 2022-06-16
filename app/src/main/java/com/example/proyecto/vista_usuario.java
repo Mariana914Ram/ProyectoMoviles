@@ -1,4 +1,4 @@
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.proyecto;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +35,7 @@ public class vista_usuario extends AppCompatActivity {
         ListViewUsuario=findViewById(R.id.lstv_usuarios);
 
         String texto = abrirArchivo("archivoUsuarios.txt");
+        Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
         if(texto == ""){
             //Ir a vista de que no existe el almacén
         }else {
@@ -104,7 +105,7 @@ public class vista_usuario extends AppCompatActivity {
 
                                 final TextView almacenText = new TextView(vista_usuario.this);
                                 almacenText.setWidth(1000);
-                                almacenText.setText("¿Estás seguro de eliminar este almacén?");
+                                almacenText.setText("¿Estás seguro de eliminar a este usuario?");
                                 LinearLayout layout = new LinearLayout(vista_usuario.this);
                                 layout.setPadding(40, 20, 40, 0);
                                 layout.addView(almacenText);

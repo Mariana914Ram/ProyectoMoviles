@@ -91,21 +91,27 @@
                     android:text="Normal" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvAlmacen"
-                android:layout_width="310dp"
-                android:layout_height="46dp"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="45dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="300dp"
-                android:layout_marginBottom="30dp"
-                android:background="@android:drawable/editbox_background"
-                android:drawableEnd="@android:drawable/arrow_down_float"
-                android:drawablePadding="16dp"
-                android:hint="Selecciona sus almacenes"
-                android:padding="12dp"
-                android:textSize="20sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAlmacen"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="300dp"
+                    android:layout_marginBottom="30dp"
+                    android:background="@android:drawable/editbox_background"
+                    android:drawableEnd="@android:drawable/arrow_down_float"
+                    android:drawablePadding="16dp"
+                    android:hint="Selecciona sus almacenes"
+                    android:padding="12dp"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
             <CheckBox
                 android:id="@+id/cbxCambiarPass"
