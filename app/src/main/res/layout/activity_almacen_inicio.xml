@@ -28,17 +28,6 @@
 
 
             <Button
-                android:id="@+id/btn_productos"
-                android:layout_width="217dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
-                android:onClick="productos"
-                android:text="@string/productos"
-                android:textColor="#FFFFFF" />
-
-
-            <Button
                 android:id="@+id/btn_materiales"
                 android:layout_width="217dp"
                 android:layout_height="wrap_content"
@@ -46,15 +35,6 @@
                 android:backgroundTint="#0C67F4"
                 android:onClick="materiales"
                 android:text="Materiales"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/btn_solicitud_productos"
-                android:layout_width="217dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
-                android:text="@string/solicitud_productos"
                 android:textColor="#FFFFFF" />
 
 
@@ -66,16 +46,6 @@
                 android:backgroundTint="#0C67F4"
                 android:onClick="solicitud_materiales"
                 android:text="Solicitud de materiales"
-                android:textColor="#FFFFFF" />
-
-
-            <Button
-                android:id="@+id/btn_salidaProductos"
-                android:layout_width="215dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
-                android:text="Salida de productos"
                 android:textColor="#FFFFFF" />
 
 
