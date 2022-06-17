@@ -31,4 +31,11 @@ public class AlmacenInicio extends AppCompatActivity {
         intent.putExtra("almacenInfo", almacen);
         startActivity(intent);
     }
+
+
+    public void materiales(View view){
+        Intent intent = new Intent(this, vista_material.class);
+        intent.putExtra("almacenInfo", almacen);
+        startActivity(intent);
+    }
 }

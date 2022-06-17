@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ProductoAdapter extends BaseAdapter {
+public class MaterialAdapter extends BaseAdapter {
 
     Context context;
-    List<ModeloProductos> list;
+    List<ModeloMateriales> list;
     LayoutInflater inflater;
 
-    public ProductoAdapter(Context context, List<ModeloProductos> list) {
+    public MaterialAdapter(Context context, List<ModeloMateriales> list) {
         this.context = context;
         this.list = list;
     }
@@ -40,32 +40,30 @@ public class ProductoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        ImageView imageProducto;
-        TextView nombreProducto;
-        TextView precioProducto;
-        TextView stockProducto;
+        ImageView imageMaterial;
+        TextView nombreMaterial;
+        TextView precioMaterial;
+        TextView stockMaterial;
         ImageButton botonEditar, botonEliminar;
 
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.listview_productos, viewGroup, false);
+        View itemView = inflater.inflate(R.layout.listview_materiales, viewGroup, false);
 
-        ModeloProductos c = list.get(i);
+        ModeloMateriales c = list.get(i);
 
-        nombreProducto = itemView.findViewById(R.id.txtProducto);
-        imageProducto = itemView.findViewById(R.id.img_Producto);
-        precioProducto = itemView.findViewById(R.id.txtPrecio);
-        stockProducto = itemView.findViewById(R.id.txtStock);
+        nombreMaterial = itemView.findViewById(R.id.txtMaterial);
+        imageMaterial = itemView.findViewById(R.id.img_Material);
+        stockMaterial = itemView.findViewById(R.id.txtStock);
 
         botonEditar = (ImageButton) itemView.findViewById(R.id.ibtnEditar);
         botonEditar.setTag(i);
         botonEliminar = (ImageButton) itemView.findViewById(R.id.ibtnEliminar);
         botonEliminar.setTag(i);
 
-        nombreProducto.setText(c.getNombre());
-        imageProducto.setImageResource(R.drawable.productos);
-        precioProducto.setText("Precio: $" + c.getPrecio());
-        stockProducto.setText("Cantidad disponible: " + c.getStock()+"");
+        nombreMaterial.setText(c.getNombre());
+        imageMaterial.setImageResource(R.drawable.herramientas);
+        stockMaterial.setText("Cantidad disponible: " + c.getStock()+"");
 
 
         botonEditar.setOnClickListener(new View.OnClickListener() {

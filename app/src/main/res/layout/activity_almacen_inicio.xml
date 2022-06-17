@@ -39,6 +39,16 @@
 
 
             <Button
+                android:id="@+id/btn_materiales"
+                android:layout_width="217dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#0C67F4"
+                android:onClick="materiales"
+                android:text="Materiales"
+                android:textColor="#FFFFFF" />
+
+            <Button
                 android:id="@+id/btn_solicitud_productos"
                 android:layout_width="217dp"
                 android:layout_height="wrap_content"
