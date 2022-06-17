@@ -4,182 +4,206 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#E5E2E6"
     tools:context=".Peticion">
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Material"
-        android:textColor="@color/naranja"
-        android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <EditText
-        android:id="@+id/et_numeroParte"
-        android:layout_width="208dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:hint="Numero de parte"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.258"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp">
 
-    <TextView
-        android:id="@+id/lb_descripcion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Descripcion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.163"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_numeroParte" />
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="340dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal"
+                android:text="Material"
+                android:textColor="@color/naranja"
+                android:textSize="34sp" />
 
-    <TextView
-        android:id="@+id/lb_localidad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Localidad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.157"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lb_descripcion" />
+            <TextView
+                android:id="@+id/lb_herramienta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Selecciona una herramienta:"
+                android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/lb_disponible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Cantidad disponible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.181"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lb_localidad" />
+            <Spinner
+                android:id="@+id/spnMaterial"
+                android:layout_width="344dp"
+                android:layout_height="41dp"
+                android:layout_marginBottom="30dp"
+                android:popupBackground="@color/blanco"
+                android:spinnerMode="dropdown" />
 
-    <EditText
-        android:id="@+id/et_cantidadRequerida"
-        android:layout_width="214dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Cantidad requerida"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.273"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lb_disponible" />
+            <TextView
+                android:id="@+id/lb_disponible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cantidad disponible"
+                android:textSize="18sp" />
 
-    <CheckBox
-        android:id="@+id/cb_noVuelve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="24dp"
-        android:text="No vuelve"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/cb_vuelve"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            <EditText
+                android:id="@+id/et_cantidadRequerida"
+                android:layout_width="214dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Cantidad requerida"
+                android:inputType="number" />
 
-    <CheckBox
-        android:id="@+id/cb_vuelve"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
-        android:text="Vuelve"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="El material"
+                android:textSize="18sp" />
 
-    <RadioButton
-        android:id="@+id/rb_pruebas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="12dp"
-        android:text="Pruebas de laboratorio"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/rb_muestra"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+            <RadioGroup
+                android:id="@+id/rdg_grupoFecha"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-    <RadioButton
-        android:id="@+id/rb_muestra"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="12dp"
-        android:text="Muestras para cliente"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                <RadioButton
+                    android:id="@+id/rb_noVuelve"
+                    android:layout_width="137dp"
+                    android:layout_height="wrap_content"
+                    android:text="No vuelve" />
 
-    <Button
-        android:id="@+id/btn_agregarOtraParte"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/azul_a"
-        android:text="Agregar"
-        android:textColor="@color/design_default_color_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.097"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rb_muestra" />
+                <RadioButton
+                    android:id="@+id/rb_vuelve"
+                    android:layout_width="137dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Vuelve" />
 
-    <Button
-        android:id="@+id/btn_pedir"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/azul_a"
-        android:text="Pedir"
-        android:textColor="@color/design_default_color_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rb_muestra" />
+            </RadioGroup>
 
-    <Button
-        android:id="@+id/btn_cancelarPeticion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/azul_a"
-        android:text="Cancelar"
-        android:textColor="@color/design_default_color_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rb_pruebas" />
+            <LinearLayout
+                android:id="@+id/layoutFecha"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FBF9F9"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="El material"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.159"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_cantidadRequerida" />
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="Fecha de devolución:"
+                    android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Motivo de salida"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.168"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cb_vuelve" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFDFD"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnFecha"
+                        android:layout_width="114dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_weight="1"
+                        android:onClick="abrirCalendario"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="Fecha" />
+
+                    <TextView
+                        android:id="@+id/lb_fecha"
+                        android:layout_width="222dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="00/00/0000"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Motivo de salida"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <RadioButton
+                        android:id="@+id/rb_pruebas"
+                        android:layout_width="257dp"
+                        android:layout_height="wrap_content"
+                        android:text="Pruebas de laboratorio" />
+
+                    <RadioButton
+                        android:id="@+id/rb_muestra"
+                        android:layout_width="260dp"
+                        android:layout_height="wrap_content"
+                        android:text="Muestras para cliente" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_agregarOtraParte"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:backgroundTint="@color/azul_a"
+                    android:text="Agregar"
+                    android:textColor="@color/design_default_color_background" />
+
+                <Button
+                    android:id="@+id/btn_pedir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="10dp"
+                    android:backgroundTint="@color/azul_a"
+                    android:text="Pedir"
+                    android:textColor="@color/design_default_color_background" />
+
+                <Button
+                    android:id="@+id/btn_cancelarPeticion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:backgroundTint="@color/azul_a"
+                    android:text="Cancelar"
+                    android:textColor="@color/design_default_color_background" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

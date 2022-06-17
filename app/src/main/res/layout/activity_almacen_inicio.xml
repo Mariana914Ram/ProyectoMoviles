@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:gravity="center_horizontal"
-                android:text="Elige una opcion"
+                android:text="Almacén"
                 android:textSize="34sp" />
 
 
@@ -59,6 +59,27 @@
 
 
             <Button
+                android:id="@+id/btn_solicitud_material"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#0C67F4"
+                android:onClick="solicitud_materiales"
+                android:text="Solicitud de materiales"
+                android:textColor="#FFFFFF" />
+
+
+            <Button
+                android:id="@+id/btn_salidaProductos"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#0C67F4"
+                android:text="Salida de productos"
+                android:textColor="#FFFFFF" />
+
+
+            <Button
                 android:id="@+id/btn_salidaMaterial"
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
@@ -67,7 +88,6 @@
                 android:text="@string/salida_material"
                 android:textColor="#FFFFFF" />
 
-
             <Button
                 android:id="@+id/btn_pendientes"
                 android:layout_width="217dp"
@@ -75,6 +95,15 @@
                 android:layout_marginTop="32dp"
                 android:backgroundTint="#0C67F4"
                 android:text="@string/pendientes"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btn_historial"
+                android:layout_width="217dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:backgroundTint="#0C67F4"
+                android:text="Historial"
                 android:textColor="#FFFFFF" />
 
 
