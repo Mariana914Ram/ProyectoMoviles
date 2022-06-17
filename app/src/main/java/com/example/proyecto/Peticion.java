@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -16,6 +18,8 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -38,11 +42,16 @@ public class Peticion extends AppCompatActivity {
     ModeloAlmacen almacen;
     String idUser = "";
     List<ModeloMateriales> list = new ArrayList<>();
+    String idMaterialSeleccionado = "", stockMaterialSeleccionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_peticion);
+
+        /*guardarArchivo("", "archivoPeticionMaterial.txt");
+        String abrir = abrirArchivo("archivoPeticionMaterial.txt");
+        Toast.makeText(this, abrir, Toast.LENGTH_LONG).show();*/
 
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");
         SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
@@ -135,6 +144,33 @@ public class Peticion extends AppCompatActivity {
             }
         });
 
+        String datoRecibido = material.getSelectedItem().toString();
+        for(int j=0; j<list.size(); j++){
+            if(datoRecibido.equals(list.get(j).getNombre())){
+                idMaterialSeleccionado = list.get(j).getId()+"";
+                stockMaterialSeleccionado = list.get(j).getStock()+"";
+                disponible.setText("Cantidad disponible: " + list.get(j).getStock());
+            }
+        }
+        material.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String datoRecibido = material.getSelectedItem().toString();
+                for(int j=0; j<list.size(); j++){
+                    if(datoRecibido.equals(list.get(j).getNombre())){
+                        idMaterialSeleccionado = list.get(j).getId()+"";
+                        stockMaterialSeleccionado = list.get(j).getStock()+"";
+                        disponible.setText("Cantidad disponible: " + list.get(j).getStock());
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
     }
 
 
@@ -157,6 +193,108 @@ public class Peticion extends AppCompatActivity {
     }
 
 
+
+
+
+    public void registrarPeticion(View view){
+        boolean verificar = true;
+
+        if(!vuelve.isChecked() && !noVuelve.isChecked()){
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Debe escoger si el material va a volver o no va a volver", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            verificar = false;
+        }
+        if(cantidad.getText().toString().isEmpty()){
+            cantidad.setError("Campo requerido");
+            verificar = false;
+        }
+        if(!laboratorio.isChecked() && !cliente.isChecked()){
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Debe escoger el motivo de la salida", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            verificar = false;
+        }
+        if(Integer.parseInt(cantidad.getText().toString()) > Integer.parseInt(stockMaterialSeleccionado)){
+            Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "La cantidad solicitada no puede superar a la disponible", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            verificar = false;
+        }
+
+        if(verificar){
+            int idM = 0;
+            String abrir = abrirArchivo("archivoPeticionMaterial.txt");
+            String texto = abrir;
+
+            if(abrir.equals("")){
+                texto = texto + "id: " + idM + "\n";
+            }else {
+                String[] modelos = abrir.split("\n\n");
+                for(int i=0; i<modelos.length; i++){
+                    String[] parts = modelos[i].split("\n");
+                    String id_temp = "";
+                    for(int j=0; j<parts.length; j++){
+
+                        if(parts[j].contains("id: ")){
+                            id_temp = parts[j];
+                            id_temp = id_temp.replace("id: ", "");
+                            if(idM < Integer.parseInt(id_temp.trim())){
+                                idM = Integer.parseInt(id_temp.trim());
+                            }
+                        }
+                    }
+                }
+                idM++;
+                texto = texto + "\nid: " + idM + "\n";
+
+            }
+
+            String fechaSeleccionada = "";
+
+            texto = texto + "idUsuario: " + idUser + "\n";
+            texto = texto + "idAlmacen: " + almacen.getId() + "\n";
+            texto = texto + "idMaterial: " + idMaterialSeleccionado + "\n";
+            texto = texto + "cantidad: " + cantidad.getText().toString() + "\n";
+            if(vuelve.isChecked()){
+                texto = texto + "volver: volver" + "\n";
+                fechaSeleccionada = txtFecha.getText().toString();
+            }else{
+                texto = texto + "volver: noVolver" + "\n";
+                fechaSeleccionada = "";
+            }
+
+            if(laboratorio.isChecked()){
+                texto = texto + "motivo: laboratorio" + "\n";
+            }else{
+                texto = texto + "motivo: cliente" + "\n";
+            }
+
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String strDate = sdf.format(c.getTime());
+
+            texto = texto + "fecha: " + strDate + "\n";
+            texto = texto + "fechaDevuelto: " + fechaSeleccionada + "\n";
+            texto = texto + "resuelto: " + "false" + "\n";
+            texto = texto + "status: " + "pendiente" + "\n";
+            texto = texto + "descripcion: " + "" + "\n";
+
+            guardarArchivo(texto, "archivoPeticionMaterial.txt");
+
+            Intent intent = new Intent(Peticion.this, AlmacenInicio.class);
+            intent.putExtra("almacenInfo", almacen);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+
+
+
+    public void cancelar(View view){
+        Intent intent = new Intent(Peticion.this, AlmacenInicio.class);
+        intent.putExtra("almacenInfo", almacen);
+        startActivity(intent);
+        finish();
+    }
 
 
     private String abrirArchivo(String nombre){

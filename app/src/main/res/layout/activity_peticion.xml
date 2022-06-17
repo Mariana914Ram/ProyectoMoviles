@@ -178,22 +178,14 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btn_agregarOtraParte"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:backgroundTint="@color/azul_a"
-                    android:text="Agregar"
-                    android:textColor="@color/design_default_color_background" />
-
-                <Button
                     android:id="@+id/btn_pedir"
-                    android:layout_width="wrap_content"
+                    android:layout_width="113dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="40dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="20dp"
                     android:backgroundTint="@color/azul_a"
+                    android:onClick="registrarPeticion"
                     android:text="Pedir"
                     android:textColor="@color/design_default_color_background" />
 
@@ -201,8 +193,10 @@
                     android:id="@+id/btn_cancelarPeticion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="40dp"
                     android:backgroundTint="@color/azul_a"
+                    android:onClick="cancelar"
                     android:text="Cancelar"
                     android:textColor="@color/design_default_color_background" />
             </LinearLayout>

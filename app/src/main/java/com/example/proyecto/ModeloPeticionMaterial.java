@@ -12,8 +12,10 @@ public class ModeloPeticionMaterial {
     private String fecha;
     private String fechaDevuelto;
     private boolean resuelto;
+    private String status;
+    private String descripcion;
 
-    public ModeloPeticionMaterial(int id, int idUsuario, int idAlmacen, int idMaterial, int cantidad, String volver, String motivo, String fecha, String fechaDevuelto, boolean resuelto) {
+    public ModeloPeticionMaterial(int id, int idUsuario, int idAlmacen, int idMaterial, int cantidad, String volver, String motivo, String fecha, String fechaDevuelto, boolean resuelto, String status, String descripcion) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idAlmacen = idAlmacen;
@@ -24,6 +26,8 @@ public class ModeloPeticionMaterial {
         this.fecha = fecha;
         this.fechaDevuelto = fechaDevuelto;
         this.resuelto = resuelto;
+        this.status = status;
+        this.descripcion = descripcion;
     }
 
     public ModeloPeticionMaterial() {
@@ -37,6 +41,8 @@ public class ModeloPeticionMaterial {
         this.fecha = "";
         this.fechaDevuelto = "";
         this.resuelto = false;
+        this.status = "aceptado"; //aceptado o rechazado o pendiente
+        this.descripcion = "";
     }
 
     public int getId() {
@@ -117,5 +123,21 @@ public class ModeloPeticionMaterial {
 
     public void setResuelto(boolean resuelto) {
         this.resuelto = resuelto;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }
