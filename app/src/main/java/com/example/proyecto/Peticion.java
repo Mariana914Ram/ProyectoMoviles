@@ -117,7 +117,7 @@ public class Peticion extends AppCompatActivity {
                 }
             }
             String[] materialesArray = cadena.split(", ");
-            ArrayAdapter<String> adapterMateriales = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, materialesArray);
+            ArrayAdapter<String> adapterMateriales = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, materialesArray);
             material.setAdapter(adapterMateriales);
         }
 
@@ -182,7 +182,7 @@ public class Peticion extends AppCompatActivity {
         int mes = cal.get(Calendar.MONTH);
         int dia = cal.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dpd = new DatePickerDialog(Peticion.this/*, R.style.DialogTheme*/, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dpd = new DatePickerDialog(Peticion.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month++;
@@ -201,7 +201,7 @@ public class Peticion extends AppCompatActivity {
         int mes = cal.get(Calendar.MONTH);
         int dia = cal.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dpd = new DatePickerDialog(Peticion.this/*, R.style.DialogTheme*/, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dpd = new DatePickerDialog(Peticion.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month++;

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,7 +26,7 @@ import java.util.Collections;
 public class AgregarUsuario extends AppCompatActivity {
 
     EditText nombre, apellidos, correo, password, repetPassword;
-    CheckBox tipoA, tipoB;
+    RadioButton tipoA, tipoB;
     TextView tvAlmacen;
     boolean[] selectAlmacen;
     ArrayList<Integer> almacenList = new ArrayList<>();
@@ -41,9 +42,12 @@ public class AgregarUsuario extends AppCompatActivity {
         correo = (EditText) findViewById(R.id.et_correoGuardar);
         password = (EditText) findViewById(R.id.et_contraGuardar);
         repetPassword = (EditText) findViewById(R.id.et_confirmarContra);
-        tipoA = (CheckBox) findViewById(R.id.cbxAdmin);
-        tipoB = (CheckBox) findViewById(R.id.cbxNormal);
+
+        tipoA = (RadioButton) findViewById(R.id.rb_Admin);
+        tipoB = (RadioButton) findViewById(R.id.rb_Usuario);
+
         tvAlmacen = (TextView) findViewById(R.id.tvAlmacen);
+
 
 
         String texto = abrirArchivo("archivoAlmacenes.txt");
@@ -149,6 +153,7 @@ public class AgregarUsuario extends AppCompatActivity {
         boolean verificar = true;
 
         if(!tipoA.isChecked() && !tipoB.isChecked()){
+
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Debe escoger un tipo de usuario", Snackbar.LENGTH_LONG);
             snackbar.show();
             verificar = false;
