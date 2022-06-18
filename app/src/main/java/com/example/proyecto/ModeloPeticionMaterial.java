@@ -10,12 +10,12 @@ public class ModeloPeticionMaterial {
     private String volver;
     private String motivo;
     private String fecha;
+    private String fechaSalida;
     private String fechaDevuelto;
-    private boolean resuelto;
     private String status;
     private String descripcion;
 
-    public ModeloPeticionMaterial(int id, int idUsuario, int idAlmacen, int idMaterial, int cantidad, String volver, String motivo, String fecha, String fechaDevuelto, boolean resuelto, String status, String descripcion) {
+    public ModeloPeticionMaterial(int id, int idUsuario, int idAlmacen, int idMaterial, int cantidad, String volver, String motivo, String fecha, String fechaSalida, String fechaDevuelto, String status, String descripcion) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idAlmacen = idAlmacen;
@@ -24,8 +24,8 @@ public class ModeloPeticionMaterial {
         this.volver = volver;
         this.motivo = motivo;
         this.fecha = fecha;
+        this.fechaSalida = fechaSalida;
         this.fechaDevuelto = fechaDevuelto;
-        this.resuelto = resuelto;
         this.status = status;
         this.descripcion = descripcion;
     }
@@ -39,8 +39,8 @@ public class ModeloPeticionMaterial {
         this.volver = "noVover"; //noVolver y volver
         this.motivo = "laboratorio"; //laboratorio y cliente
         this.fecha = "";
+        this.fechaSalida = "";
         this.fechaDevuelto = "";
-        this.resuelto = false;
         this.status = "aceptado"; //aceptado o rechazado o pendiente
         this.descripcion = "";
     }
@@ -109,20 +109,20 @@ public class ModeloPeticionMaterial {
         this.fecha = fecha;
     }
 
+    public String getFechaSalida() {
+        return fechaSalida;
+    }
+
+    public void setFechaSalida(String fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
+
     public String getFechaDevuelto() {
         return fechaDevuelto;
     }
 
     public void setFechaDevuelto(String fechaDevuelto) {
         this.fechaDevuelto = fechaDevuelto;
-    }
-
-    public boolean isResuelto() {
-        return resuelto;
-    }
-
-    public void setResuelto(boolean resuelto) {
-        this.resuelto = resuelto;
     }
 
     public String getStatus() {

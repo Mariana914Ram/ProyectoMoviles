@@ -11,6 +11,9 @@
         android:theme="@style/Theme.Proyecto">
         <activity android:name=".ActivityMenu"></activity>
         <activity
+            android:name=".vista_responderSolicitudes"
+            android:exported="false" />
+        <activity
             android:name=".vista_material"
             android:exported="false" />
         <activity

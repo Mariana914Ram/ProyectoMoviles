@@ -95,6 +95,50 @@
             </RadioGroup>
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#FBF9F9"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtFechaSalida"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:text="Fecha de salida:"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFFDFD"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnFechaSalida"
+                        android:layout_width="114dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_weight="1"
+                        android:onClick="abrirCalendarioSalida"
+                        android:paddingTop="3dp"
+                        android:paddingBottom="3dp"
+                        android:text="Fecha" />
+
+                    <TextView
+                        android:id="@+id/lb_fechaSalida"
+                        android:layout_width="222dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="00/00/0000"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/layoutFecha"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
