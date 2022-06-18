@@ -56,6 +56,7 @@ public class Peticion extends AppCompatActivity {
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");
         SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
         idUser = preferences.getString("id", "");
+        
 
         cantidad = (EditText) findViewById(R.id.et_cantidadRequerida);
         vuelve = (RadioButton) findViewById(R.id.rb_vuelve);
