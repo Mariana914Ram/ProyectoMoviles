@@ -1,11 +1,13 @@
 package com.example.proyecto;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.util.PatternsCompat;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.regex.Pattern;
 
 public class Registrar extends AppCompatActivity {
 
@@ -47,10 +50,16 @@ public class Registrar extends AppCompatActivity {
             apellidos.setError("Campo requerido");
             verificar = false;
         }
-        if(correo.getText().toString().isEmpty()){
-            correo.setError("Campo requerido");
-            verificar = false;
-        }
+            if(correo.getText().toString().isEmpty()){
+                correo.setError("Campo requerido");
+                verificar = false;
+
+            }else{
+                Pattern pattern = Patterns.EMAIL_ADDRESS;
+                if (pattern.matcher((CharSequence) correo).matches()==false){
+                correo.setError("Formato de correo electronico invalido");
+            }}
+
         if(password.getText().toString().isEmpty()){
             password.setError("Campo requerido");
             verificar = false;
@@ -117,6 +126,24 @@ public class Registrar extends AppCompatActivity {
             Intent intent = new Intent(Registrar.this, MainActivity.class);
             startActivity(intent);
             finish();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 

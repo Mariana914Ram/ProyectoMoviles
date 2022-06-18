@@ -1,30 +1,23 @@
 package com.example.proyecto;
 
-public class ModeloProductos {
-
+public class ModeloMateriales {
     private int id;
     private int idAlmacen;
     private String nombre;
-    private int imagen;
-    private double precio;
     private int stock;
 
-    public ModeloProductos(int id, int idAlmacen, String nombre, int imagen, double precio, int stock) {
+    public ModeloMateriales(int id, int idAlmacen, String nombre, int stock) {
         this.id = id;
         this.idAlmacen = idAlmacen;
         this.nombre = nombre;
-        this.imagen = imagen;
-        this.precio = precio;
         this.stock = stock;
     }
 
-    public ModeloProductos() {
+    public ModeloMateriales() {
         this.id = -1;
         this.idAlmacen = -1;
         this.nombre = "none";
-        this.imagen = -1;
-        this.precio = 0.00;
-        this.stock = 0;
+        this.stock = -1;
     }
 
     public int getId() {
@@ -49,22 +42,6 @@ public class ModeloProductos {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public int getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(int imagen) {
-        this.imagen = imagen;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
     }
 
     public int getStock() {

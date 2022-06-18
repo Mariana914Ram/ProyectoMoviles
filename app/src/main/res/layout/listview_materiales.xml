@@ -8,7 +8,7 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/img_Producto"
+        android:id="@+id/img_Material"
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:layout_weight="20"
@@ -33,7 +33,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtProducto"
+                    android:id="@+id/txtMaterial"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
                     android:layout_weight="50"
@@ -49,12 +49,6 @@
                     android:layout_weight="50"
                     android:text="TextView" />
 
-                <TextView
-                    android:id="@+id/txtPrecio"
-                    android:layout_width="match_parent"
-                    android:layout_height="3dp"
-                    android:layout_weight="50"
-                    android:text="TextView" />
             </LinearLayout>
 
             <ImageButton

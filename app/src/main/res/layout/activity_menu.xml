@@ -39,24 +39,6 @@
                 android:textColor="#FFFFFF" />
 
             <Button
-                android:id="@+id/btn_pendientes"
-                android:layout_width="217dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="@color/azul_a"
-                android:text="@string/pendientes"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/btn_salidaMaterial"
-                android:layout_width="215dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="@color/azul_a"
-                android:text="@string/salida_material"
-                android:textColor="#FFFFFF" />
-
-            <Button
                 android:id="@+id/btn_agregarUsuario"
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
