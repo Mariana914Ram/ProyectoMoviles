@@ -36,14 +36,14 @@
                 android:id="@+id/txtEspacioImagen"
                 android:layout_width="20dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_weight="20" />
 
             <TextView
                 android:id="@+id/txtEspacioTexto"
                 android:layout_width="176dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:paddingLeft="3dp"
+                android:gravity="center_horizontal"
                 android:text="Información"
                 android:textColor="#FFFFFF" />
 
@@ -52,7 +52,7 @@
                 android:layout_width="65dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
+                android:gravity="right|center_horizontal"
                 android:text="Ver"
                 android:textColor="#FBFBFB" />
 

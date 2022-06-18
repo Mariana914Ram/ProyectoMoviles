@@ -44,7 +44,6 @@ public class vista_material extends AppCompatActivity {
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");
 
         String texto = abrirArchivo("archivoMateriales.txt");
-
         Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
         if(!texto.equals("")){
             String[] material = texto.split("\n\n");
@@ -78,7 +77,7 @@ public class vista_material extends AppCompatActivity {
                 }
 
                 if(idAlmacen_temp.equals(almacen.getId()+"")){
-                    list.add(new ModeloMateriales(Integer.parseInt(id_temp), Integer.parseInt(idAlmacen_temp), nombre_temp, Integer.parseInt(stock_temp)));
+                    list.add(new ModeloMateriales(Integer.parseInt(id_temp), Integer.parseInt(idAlmacen_temp), nombre_temp, Integer.parseInt(stock_temp.trim())));
                     contador++;
                 }
             }
@@ -227,6 +226,8 @@ public class vista_material extends AppCompatActivity {
 
 
     private void editarMaterial(ModeloMateriales c){
+        cargarDatosEnLista();
+
         AlertDialog.Builder mydialog = new AlertDialog.Builder(vista_material.this);
         mydialog.setTitle("Editar material "+ c.getNombre());
 
@@ -327,6 +328,9 @@ public class vista_material extends AppCompatActivity {
 
 
     private void eliminarMaterial(ModeloMateriales c){
+
+        cargarDatosEnLista();
+
         AlertDialog.Builder mydialog = new AlertDialog.Builder(vista_material.this);
         mydialog = new AlertDialog.Builder(vista_material.this);
         mydialog.setTitle("Eliminar material "+ c.getNombre());
@@ -374,6 +378,47 @@ public class vista_material extends AppCompatActivity {
             }
         });
         mydialog.show();
+    }
+
+
+
+    private void cargarDatosEnLista(){
+        list.clear();
+
+        String texto = abrirArchivo("archivoMateriales.txt");
+        if(!texto.equals("")){
+            String[] material = texto.split("\n\n");
+            for(int i=0; i<material.length; i++){
+                String[] parteMaterial = material[i].split("\n");
+                String id_temp = "";
+                String idAlmacen_temp = "";
+                String nombre_temp = "";
+                String stock_temp = "";
+                for(int j=0; j<parteMaterial.length; j++){
+
+
+                    if(parteMaterial[j].contains("id: ")){
+                        id_temp = parteMaterial[j];
+                        id_temp = id_temp.replace("id: ", "");
+                    }
+                    if(parteMaterial[j].contains("idAlmacen: ")){
+                        idAlmacen_temp = parteMaterial[j];
+                        idAlmacen_temp = idAlmacen_temp.replace("idAlmacen: ", "");
+                    }
+                    if(parteMaterial[j].contains("nombre: ")){
+                        nombre_temp = parteMaterial[j];
+                        nombre_temp = nombre_temp.replace("nombre: ", "");
+                    }
+                    if(parteMaterial[j].contains("stock: ")){
+                        stock_temp = parteMaterial[j];
+                        stock_temp = stock_temp.replace("stock: ", "");
+                    }
+
+                }
+
+                list.add(new ModeloMateriales(Integer.parseInt(id_temp), Integer.parseInt(idAlmacen_temp), nombre_temp, Integer.parseInt(stock_temp)));
+            }
+        }
     }
 
 

@@ -6,6 +6,8 @@ public class ModeloPeticionMaterial {
     private int idUsuario;
     private int idAlmacen;
     private int idMaterial;
+    private String nombreUsuario;
+    private String nombreMaterial;
     private int cantidad;
     private String volver;
     private String motivo;
@@ -15,11 +17,13 @@ public class ModeloPeticionMaterial {
     private String status;
     private String descripcion;
 
-    public ModeloPeticionMaterial(int id, int idUsuario, int idAlmacen, int idMaterial, int cantidad, String volver, String motivo, String fecha, String fechaSalida, String fechaDevuelto, String status, String descripcion) {
+    public ModeloPeticionMaterial(int id, int idUsuario, int idAlmacen, int idMaterial, String nombreUsuario, String nombreMaterial, int cantidad, String volver, String motivo, String fecha, String fechaSalida, String fechaDevuelto, String status, String descripcion) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idAlmacen = idAlmacen;
         this.idMaterial = idMaterial;
+        this.nombreUsuario = nombreUsuario;
+        this.nombreMaterial = nombreMaterial;
         this.cantidad = cantidad;
         this.volver = volver;
         this.motivo = motivo;
@@ -35,6 +39,8 @@ public class ModeloPeticionMaterial {
         this.idUsuario = -1;
         this.idAlmacen = -1;
         this.idMaterial = -1;
+        this.nombreUsuario = "none";
+        this.nombreMaterial = "none";
         this.cantidad = -1;
         this.volver = "noVover"; //noVolver y volver
         this.motivo = "laboratorio"; //laboratorio y cliente
@@ -75,6 +81,22 @@ public class ModeloPeticionMaterial {
 
     public void setIdMaterial(int idMaterial) {
         this.idMaterial = idMaterial;
+    }
+
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getNombreMaterial() {
+        return nombreMaterial;
+    }
+
+    public void setNombreMaterial(String nombreMaterial) {
+        this.nombreMaterial = nombreMaterial;
     }
 
     public int getCantidad() {

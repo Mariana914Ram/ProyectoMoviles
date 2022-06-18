@@ -42,6 +42,7 @@ public class ResponderSolicitudesAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ImageView imageMaterial;
         TextView nombreMaterial;
+        TextView cantidadMaterial;
         TextView fechaSalida;
         TextView fechaEntrada;
         ImageButton botonInfo, botonAceptar, botonRechazar;
@@ -53,6 +54,7 @@ public class ResponderSolicitudesAdapter extends BaseAdapter {
         ModeloPeticionMaterial c = list.get(i);
 
         nombreMaterial = itemView.findViewById(R.id.txtNombreMaterial);
+        cantidadMaterial = itemView.findViewById(R.id.txtCantidad);
         imageMaterial = itemView.findViewById(R.id.img_PeticionMaterial);
         fechaSalida = itemView.findViewById(R.id.txtFechaSalida);
         fechaEntrada = itemView.findViewById(R.id.txtFechaEntrada);
@@ -66,10 +68,18 @@ public class ResponderSolicitudesAdapter extends BaseAdapter {
 
 
 
-        nombreMaterial.setText("dfmlkdsfkdlslf");
+        nombreMaterial.setText(c.getNombreMaterial());
+        cantidadMaterial.setText(c.getCantidad() + " piezas");
         imageMaterial.setImageResource(R.drawable.productos);
-        fechaSalida.setText("Fecha de salida: " + c.getFechaSalida());
-        fechaEntrada.setText("Fecha de devolución: " + c.getFechaDevuelto());
+        fechaSalida.setText("Salida: " + c.getFechaSalida());
+        String devolucion = "";
+        if(c.getFechaDevuelto().equals("")){
+            devolucion = "Sin retorno";
+        }
+        else{
+            devolucion = "Devolución: " + c.getFechaDevuelto();
+        }
+        fechaEntrada.setText(devolucion);
 
 
         botonInfo.setOnClickListener(new View.OnClickListener() {
