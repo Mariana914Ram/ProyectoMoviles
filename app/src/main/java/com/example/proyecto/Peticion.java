@@ -40,9 +40,10 @@ public class Peticion extends AppCompatActivity {
     LinearLayout layoutFecha;
 
     ModeloAlmacen almacen;
-    String idUser = "";
+    String idUser = "", nombreUser = "";
     List<ModeloMateriales> list = new ArrayList<>();
-    String idMaterialSeleccionado = "", stockMaterialSeleccionado;
+    List<ModeloMateriales> listaCompleta = new ArrayList<>();
+    String idMaterialSeleccionado = "", stockMaterialSeleccionado = "", nombreMaterialSeleccionado = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class Peticion extends AppCompatActivity {
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");
         SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
         idUser = preferences.getString("id", "");
-        
+        nombreUser = preferences.getString("nombre", "") + " " + preferences.getString("apellidos", "");
 
         cantidad = (EditText) findViewById(R.id.et_cantidadRequerida);
         vuelve = (RadioButton) findViewById(R.id.rb_vuelve);
@@ -118,7 +119,7 @@ public class Peticion extends AppCompatActivity {
                 }
             }
             String[] materialesArray = cadena.split(", ");
-            ArrayAdapter<String> adapterMateriales = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, materialesArray);
+            ArrayAdapter<String> adapterMateriales = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, materialesArray);
             material.setAdapter(adapterMateriales);
         }
 
@@ -127,6 +128,7 @@ public class Peticion extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String strDate = sdf.format(c.getTime());
         txtFecha.setText(strDate);
+        txtFechaSalida.setText(strDate);
 
 
         layoutFecha.getLayoutParams().height=1;
@@ -150,6 +152,7 @@ public class Peticion extends AppCompatActivity {
         for(int j=0; j<list.size(); j++){
             if(datoRecibido.equals(list.get(j).getNombre())){
                 idMaterialSeleccionado = list.get(j).getId()+"";
+                nombreMaterialSeleccionado = list.get(j).getNombre();
                 stockMaterialSeleccionado = list.get(j).getStock()+"";
                 disponible.setText("Cantidad disponible: " + list.get(j).getStock());
             }
@@ -161,6 +164,7 @@ public class Peticion extends AppCompatActivity {
                 for(int j=0; j<list.size(); j++){
                     if(datoRecibido.equals(list.get(j).getNombre())){
                         idMaterialSeleccionado = list.get(j).getId()+"";
+                        nombreMaterialSeleccionado = list.get(j).getNombre();
                         stockMaterialSeleccionado = list.get(j).getStock()+"";
                         disponible.setText("Cantidad disponible: " + list.get(j).getStock());
                     }
@@ -183,7 +187,7 @@ public class Peticion extends AppCompatActivity {
         int mes = cal.get(Calendar.MONTH);
         int dia = cal.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dpd = new DatePickerDialog(Peticion.this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dpd = new DatePickerDialog(Peticion.this/*, R.style.DialogTheme*/, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month++;
@@ -202,7 +206,7 @@ public class Peticion extends AppCompatActivity {
         int mes = cal.get(Calendar.MONTH);
         int dia = cal.get(Calendar.DAY_OF_MONTH);
 
-        DatePickerDialog dpd = new DatePickerDialog(Peticion.this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog dpd = new DatePickerDialog(Peticion.this/*, R.style.DialogTheme*/, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month++;
@@ -273,6 +277,8 @@ public class Peticion extends AppCompatActivity {
             texto = texto + "idUsuario: " + idUser + "\n";
             texto = texto + "idAlmacen: " + almacen.getId() + "\n";
             texto = texto + "idMaterial: " + idMaterialSeleccionado + "\n";
+            texto = texto + "nombreUsuario: " + nombreUser + "\n";
+            texto = texto + "nombreMaterial: " + nombreMaterialSeleccionado + "\n";
             texto = texto + "cantidad: " + cantidad.getText().toString() + "\n";
             if(vuelve.isChecked()){
                 texto = texto + "volver: volver" + "\n";
@@ -300,7 +306,34 @@ public class Peticion extends AppCompatActivity {
 
             guardarArchivo(texto, "archivoPeticionMaterial.txt");
 
-            Intent intent = new Intent(Peticion.this, AlmacenInicio.class);
+
+            cargarDatosEnLista();
+            texto = "";
+
+            for(int i=0; i<listaCompleta.size(); i++){
+                if(i==0){
+                    texto = "id: " + listaCompleta.get(i).getId() + "\n";
+                }
+                else{
+                    texto = texto + "\nid: " + listaCompleta.get(i).getId() + "\n";
+                }
+                texto = texto + "idAlmacen: " + listaCompleta.get(i).getIdAlmacen() + "\n";
+                texto = texto + "nombre: " + listaCompleta.get(i).getNombre() + "\n";
+
+                if(listaCompleta.get(i).getId() == Integer.parseInt(idMaterialSeleccionado)){
+                    int stock_temp = listaCompleta.get(i).getStock();
+                    int obtenerCantidad = Integer.parseInt(cantidad.getText().toString());
+                    stock_temp = stock_temp - obtenerCantidad;
+                    texto = texto + "stock: " + stock_temp + "\n";
+                }
+                else{
+                    texto = texto + "stock: " + listaCompleta.get(i).getStock() + "\n";
+                }
+            }
+            guardarArchivo(texto, "archivoMateriales.txt");
+
+
+            Intent intent = new Intent(Peticion.this, vista_responderSolicitudes.class);
             intent.putExtra("almacenInfo", almacen);
             startActivity(intent);
             finish();
@@ -316,6 +349,47 @@ public class Peticion extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
+
+    private void cargarDatosEnLista(){
+        listaCompleta.clear();
+        String texto = abrirArchivo("archivoMateriales.txt");
+        if(!texto.equals("")){
+            String[] material = texto.split("\n\n");
+            for(int i=0; i<material.length; i++){
+                String[] parteMaterial = material[i].split("\n");
+                String id_temp = "";
+                String idAlmacen_temp = "";
+                String nombre_temp = "";
+                String stock_temp = "";
+                for(int j=0; j<parteMaterial.length; j++){
+
+
+                    if(parteMaterial[j].contains("id: ")){
+                        id_temp = parteMaterial[j];
+                        id_temp = id_temp.replace("id: ", "");
+                    }
+                    if(parteMaterial[j].contains("idAlmacen: ")){
+                        idAlmacen_temp = parteMaterial[j];
+                        idAlmacen_temp = idAlmacen_temp.replace("idAlmacen: ", "");
+                    }
+                    if(parteMaterial[j].contains("nombre: ")){
+                        nombre_temp = parteMaterial[j];
+                        nombre_temp = nombre_temp.replace("nombre: ", "");
+                    }
+                    if(parteMaterial[j].contains("stock: ")){
+                        stock_temp = parteMaterial[j];
+                        stock_temp = stock_temp.replace("stock: ", "");
+                    }
+
+                }
+
+                listaCompleta.add(new ModeloMateriales(Integer.parseInt(id_temp), Integer.parseInt(idAlmacen_temp), nombre_temp, Integer.parseInt(stock_temp)));
+            }
+        }
+    }
+
 
 
     private String abrirArchivo(String nombre){

@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:gravity="center_horizontal"
-                android:text="Elige una opcion"
+                android:text="Elige una opción"
                 android:textColor="@color/naranja"
                 android:textSize="34sp" />
 
@@ -38,15 +38,23 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF" />
 
-            <Button
-                android:id="@+id/btn_agregarUsuario"
-                android:layout_width="215dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="@color/azul_a"
-                android:onClick="opcionUsuario"
-                android:text="@string/ver_usuarios"
-                android:textColor="#FFFFFF" />
+            <LinearLayout
+                android:id="@+id/layoutBotonUsuarios"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_agregarUsuario"
+                    android:layout_width="215dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:backgroundTint="@color/azul_a"
+                    android:onClick="opcionUsuario"
+                    android:text="@string/ver_usuarios"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_cerrarSesion"

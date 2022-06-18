@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class ResponderSolicitudesAdapter extends BaseAdapter {
+public class PendientesAdapter  extends BaseAdapter {
 
     Context context;
     List<ModeloPeticionMaterial> list;
     LayoutInflater inflater;
 
-    public ResponderSolicitudesAdapter(Context context, List<ModeloPeticionMaterial> list) {
+    public PendientesAdapter(Context context, List<ModeloPeticionMaterial> list) {
         this.context = context;
         this.list = list;
     }
@@ -45,27 +45,22 @@ public class ResponderSolicitudesAdapter extends BaseAdapter {
         TextView cantidadMaterial;
         TextView fechaSalida;
         TextView fechaEntrada;
-        ImageButton botonInfo, botonAceptar, botonRechazar;
+        ImageButton botonAceptar;
 
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.listview_responder_solicitudes, viewGroup, false);
+        View itemView = inflater.inflate(R.layout.listview_pendientes, viewGroup, false);
 
         ModeloPeticionMaterial c = list.get(i);
 
         nombreMaterial = itemView.findViewById(R.id.txtNombreMaterial);
         cantidadMaterial = itemView.findViewById(R.id.txtCantidad);
-        imageMaterial = itemView.findViewById(R.id.img_PeticionMaterial);
+        imageMaterial = itemView.findViewById(R.id.img_Pendiente);
         fechaSalida = itemView.findViewById(R.id.txtFechaSalida);
         fechaEntrada = itemView.findViewById(R.id.txtFechaEntrada);
 
-        botonInfo = (ImageButton) itemView.findViewById(R.id.ibtnInfo);
-        botonInfo.setTag(i);
         botonAceptar = (ImageButton) itemView.findViewById(R.id.ibtnAceptar);
         botonAceptar.setTag(i);
-        botonRechazar = (ImageButton) itemView.findViewById(R.id.ibtnRechazar);
-        botonRechazar.setTag(i);
-
 
 
         nombreMaterial.setText(c.getNombreMaterial());
@@ -82,14 +77,6 @@ public class ResponderSolicitudesAdapter extends BaseAdapter {
         fechaEntrada.setText(devolucion);
 
 
-        botonInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View viewer) {
-                ((ListView) viewGroup).performItemClick(viewer, i, 0);
-            }
-        });
-
-
         botonAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View viewer) {
@@ -97,13 +84,6 @@ public class ResponderSolicitudesAdapter extends BaseAdapter {
             }
         });
 
-
-        botonRechazar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View viewer) {
-                ((ListView) viewGroup).performItemClick(viewer, i, 0);
-            }
-        });
         return itemView;
 
     }

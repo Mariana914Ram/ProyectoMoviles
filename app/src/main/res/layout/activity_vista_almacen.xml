@@ -23,17 +23,25 @@
             android:textColor="@color/naranja"
             android:textSize="30sp" />
 
-        <Button
-            android:id="@+id/btnAddAlmacen"
-            android:layout_width="160dp"
+        <LinearLayout
+            android:id="@+id/layoutAgregarAlmacen"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:backgroundTint="#4CAF50"
-            android:gravity="center"
-            android:onClick="agregarAlmacen"
-            android:text="+ Almacén"
-            android:textAlignment="center"
-            android:textColor="#FAF6F6" />
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnAddAlmacen"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:backgroundTint="#4CAF50"
+                android:gravity="center"
+                android:onClick="agregarAlmacen"
+                android:text="+ Almacén"
+                android:textAlignment="center"
+                android:textColor="#FAF6F6" />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/lstv_almacenes"

@@ -7,18 +7,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class ResponderSolicitudesAdapter extends BaseAdapter {
+public class HistorialAdapter extends BaseAdapter {
 
     Context context;
     List<ModeloPeticionMaterial> list;
     LayoutInflater inflater;
 
-    public ResponderSolicitudesAdapter(Context context, List<ModeloPeticionMaterial> list) {
+    public HistorialAdapter(Context context, List<ModeloPeticionMaterial> list) {
         this.context = context;
         this.list = list;
     }
@@ -45,65 +46,62 @@ public class ResponderSolicitudesAdapter extends BaseAdapter {
         TextView cantidadMaterial;
         TextView fechaSalida;
         TextView fechaEntrada;
-        ImageButton botonInfo, botonAceptar, botonRechazar;
+        TextView status;
+        TextView descripcion;
+        ImageButton botonEliminar;
+        LinearLayout layoutEliminar;
 
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = inflater.inflate(R.layout.listview_responder_solicitudes, viewGroup, false);
+        View itemView = inflater.inflate(R.layout.listview_historial, viewGroup, false);
 
         ModeloPeticionMaterial c = list.get(i);
 
         nombreMaterial = itemView.findViewById(R.id.txtNombreMaterial);
         cantidadMaterial = itemView.findViewById(R.id.txtCantidad);
-        imageMaterial = itemView.findViewById(R.id.img_PeticionMaterial);
+        imageMaterial = itemView.findViewById(R.id.img_Historial);
         fechaSalida = itemView.findViewById(R.id.txtFechaSalida);
         fechaEntrada = itemView.findViewById(R.id.txtFechaEntrada);
+        status = itemView.findViewById(R.id.txtStatus);
+        descripcion = itemView.findViewById(R.id.txtDescripcion);
+        layoutEliminar = itemView.findViewById(R.id.layoutEliminar);
 
-        botonInfo = (ImageButton) itemView.findViewById(R.id.ibtnInfo);
-        botonInfo.setTag(i);
-        botonAceptar = (ImageButton) itemView.findViewById(R.id.ibtnAceptar);
-        botonAceptar.setTag(i);
-        botonRechazar = (ImageButton) itemView.findViewById(R.id.ibtnRechazar);
-        botonRechazar.setTag(i);
-
+        botonEliminar = (ImageButton) itemView.findViewById(R.id.ibtnEliminar);
+        botonEliminar.setTag(i);
 
 
         nombreMaterial.setText(c.getNombreMaterial());
         cantidadMaterial.setText(c.getCantidad() + " piezas");
-        imageMaterial.setImageResource(R.drawable.productos);
-        fechaSalida.setText("Salida: " + c.getFechaSalida());
-        String devolucion = "";
-        if(c.getFechaDevuelto().equals("")){
-            devolucion = "Sin retorno";
+        if(c.getStatus().equals("pendiente")){
+            imageMaterial.setImageResource(R.drawable.naranja);
+        }
+        else if(c.getStatus().equals("aceptado")){
+            imageMaterial.setImageResource(R.drawable.verde);
+
+            if(c.getVolver().equals("volver")){
+                layoutEliminar.getLayoutParams().height=1;
+                layoutEliminar.requestLayout();
+            }
+        }
+        else if(c.getStatus().equals("devuelto")){
+            imageMaterial.setImageResource(R.drawable.azul);
         }
         else{
-            devolucion = "Devolución: " + c.getFechaDevuelto();
+            imageMaterial.setImageResource(R.drawable.rojo);
         }
-        fechaEntrada.setText(devolucion);
+        fechaSalida.setText("Salida: " + c.getFechaSalida());
+        fechaEntrada.setText("Devolución: " + c.getFechaDevuelto());
+        status.setText(c.getStatus());
+        descripcion.setText(c.getDescripcion());
 
 
-        botonInfo.setOnClickListener(new View.OnClickListener() {
+        botonEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View viewer) {
                 ((ListView) viewGroup).performItemClick(viewer, i, 0);
             }
         });
 
-
-        botonAceptar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View viewer) {
-                ((ListView) viewGroup).performItemClick(viewer, i, 0);
-            }
-        });
-
-
-        botonRechazar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View viewer) {
-                ((ListView) viewGroup).performItemClick(viewer, i, 0);
-            }
-        });
         return itemView;
 
     }

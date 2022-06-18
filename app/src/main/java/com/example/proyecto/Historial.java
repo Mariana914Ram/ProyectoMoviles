@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -21,21 +22,25 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pendientes extends AppCompatActivity {
+public class Historial extends AppCompatActivity {
 
     ListView ListViewPeticionesMateriales;
     List<ModeloPeticionMaterial> list = new ArrayList<>();
+    List<ModeloPeticionMaterial> listReverso = new ArrayList<>();
     List<ModeloPeticionMaterial> listaCompleta = new ArrayList<>();
     List<ModeloMateriales> listMateriales = new ArrayList<>();
     ModeloAlmacen almacen;
+    String idUser = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pendientes);
+        setContentView(R.layout.activity_historial);
 
+        ListViewPeticionesMateriales=findViewById(R.id.lstv_historial);
 
-        ListViewPeticionesMateriales=findViewById(R.id.lstv_pendientes);
+        SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
+        idUser = preferences.getString("id", "");
 
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");
 
@@ -121,15 +126,19 @@ public class Pendientes extends AppCompatActivity {
                     }
                 }
 
-                if(idAlmacen_temp.equals(almacen.getId()+"") && status_temp.equals("aceptado")){
+                if(idAlmacen_temp.equals(almacen.getId()+"") && idUsuario_temp.equals(idUser)){
                     list.add(new ModeloPeticionMaterial(Integer.parseInt(id_temp), Integer.parseInt(idUsuario_temp), Integer.parseInt(idAlmacen_temp), Integer.parseInt(idMaterial_temp), nombreUsuario_temp, nombreMaterial_temp, Integer.parseInt(cantidad_temp), volver_temp, motivo_temp, fecha_temp, fechaSalida_temp, fechaDevuelto_temp, status_temp, descripcion_temp));
                     contador++;
                 }
             }
 
-
             if(contador > 0){
-                PendientesAdapter adapter = new PendientesAdapter(this, list);
+
+                for(int i=list.size()-1; i>=0; i--){
+                    listReverso.add(list.get(i));
+                }
+
+                HistorialAdapter adapter = new HistorialAdapter(this, listReverso);
                 ListViewPeticionesMateriales.setAdapter(adapter);
 
                 ListViewPeticionesMateriales.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -139,9 +148,15 @@ public class Pendientes extends AppCompatActivity {
                         ModeloPeticionMaterial c;
 
                         switch (viewId){
-                            case R.id.ibtnAceptar:
-                                c = list.get(i);
-                                modalAceptar(c);
+                            case R.id.ibtnEliminar:
+                                c = listReverso.get(i);
+
+                                if(c.getStatus().equals("pendiente")){
+                                    modalEliminar(c);
+                                }
+                                else{
+                                    eliminarHistorial(c);
+                                }
 
                                 break;
                         }
@@ -152,24 +167,46 @@ public class Pendientes extends AppCompatActivity {
     }
 
 
+    private void modalEliminar(ModeloPeticionMaterial c){
+        AlertDialog.Builder mydialog = new AlertDialog.Builder(Historial.this);
+        mydialog = new AlertDialog.Builder(Historial.this);
+        mydialog.setTitle("Eliminar solicitud de material");
 
-    private void modalAceptar(ModeloPeticionMaterial c){
-        AlertDialog.Builder mydialog = new AlertDialog.Builder(Pendientes.this);
-        mydialog = new AlertDialog.Builder(Pendientes.this);
-        mydialog.setTitle("Aceptar salida de material");
-
-        final TextView almacenText = new TextView(Pendientes.this);
+        final TextView almacenText = new TextView(Historial.this);
         almacenText.setWidth(1000);
-        almacenText.setText("¿El usuario " + c.getNombreUsuario() + " ha devuelto las " + c.getCantidad() + " piezas prestadas");
-        final LinearLayout layout = new LinearLayout(Pendientes.this);
+        almacenText.setText("Esta solicitud no ha sido aceptada ni rechazada ¿Está seguro que desea eliminarla?");
+        final LinearLayout layout = new LinearLayout(Historial.this);
         layout.setPadding(40, 20, 40, 0);
         layout.addView(almacenText);
         mydialog.setView(layout);
 
         mydialog.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                botonAceptar(c);
+            public void onClick(DialogInterface dialogInterface, int j) {
+
+                cargarDatosEnListaMaterial();
+                String texto = "";
+                for(int i=0; i<listMateriales.size(); i++){
+                    if(i==0){
+                        texto = "id: " + listMateriales.get(i).getId() + "\n";
+                    }
+                    else{
+                        texto = texto + "\nid: " + listMateriales.get(i).getId() + "\n";
+                    }
+                    texto = texto + "idAlmacen: " + listMateriales.get(i).getIdAlmacen() + "\n";
+                    texto = texto + "nombre: " + listMateriales.get(i).getNombre() + "\n";
+                    if(c.getIdMaterial() == listMateriales.get(i).getId()){
+                        int stock_regresado = listMateriales.get(i).getStock() + c.getCantidad();
+                        texto = texto + "stock: " + stock_regresado + "\n";
+                    }
+                    else{
+                        texto = texto + "stock: " + listMateriales.get(i).getStock() + "\n";
+                    }
+
+                }
+                guardarArchivo(texto, "archivoMateriales.txt");
+
+                eliminarHistorial(c);
             }
         });
 
@@ -185,69 +222,43 @@ public class Pendientes extends AppCompatActivity {
 
 
 
-    private void botonAceptar(ModeloPeticionMaterial c){
+
+
+    private void eliminarHistorial(ModeloPeticionMaterial c){
         cargarDatosEnLista();
 
         String texto = "";
         for(int i=0; i<listaCompleta.size(); i++){
-            if(i==0){
-                texto = texto + "id: " + listaCompleta.get(i).getId() + "\n";
-            }
-            else{
-                texto = texto + "\nid: " + listaCompleta.get(i).getId() + "\n";
-            }
-            texto = texto + "idUsuario: " + listaCompleta.get(i).getIdUsuario() + "\n";
-            texto = texto + "idAlmacen: " + listaCompleta.get(i).getIdAlmacen() + "\n";
-            texto = texto + "idMaterial: " + listaCompleta.get(i).getIdMaterial() + "\n";
-            texto = texto + "nombreUsuario: " + listaCompleta.get(i).getNombreUsuario() + "\n";
-            texto = texto + "nombreMaterial: " + listaCompleta.get(i).getNombreMaterial() + "\n";
-            texto = texto + "cantidad: " + listaCompleta.get(i).getCantidad() + "\n";
-            texto = texto + "volver: " + listaCompleta.get(i).getVolver() + "\n";
-            texto = texto + "motivo: " + listaCompleta.get(i).getMotivo() + "\n";
-            texto = texto + "fecha: " + listaCompleta.get(i).getFecha() + "\n";
-            texto = texto + "fechaSalida: " + listaCompleta.get(i).getFechaSalida() + "\n";
-            texto = texto + "fechaDevuelto: " + listaCompleta.get(i).getFechaDevuelto() + "\n";
-            if(listaCompleta.get(i).getId() == c.getId()){
-                texto = texto + "status: " + "devuelto" + "\n";
-                texto = texto + "descripcion: " + "Ha devuelto el material prestado" + "\n";
-            }
-            else{
+            if(c.getId() != listaCompleta.get(i).getId()){
+                if(i==0){
+                    texto = texto + "id: " + listaCompleta.get(i).getId() + "\n";
+                }
+                else{
+                    texto = texto + "\nid: " + listaCompleta.get(i).getId() + "\n";
+                }
+                texto = texto + "idUsuario: " + listaCompleta.get(i).getIdUsuario() + "\n";
+                texto = texto + "idAlmacen: " + listaCompleta.get(i).getIdAlmacen() + "\n";
+                texto = texto + "idMaterial: " + listaCompleta.get(i).getIdMaterial() + "\n";
+                texto = texto + "nombreUsuario: " + listaCompleta.get(i).getNombreUsuario() + "\n";
+                texto = texto + "nombreMaterial: " + listaCompleta.get(i).getNombreMaterial() + "\n";
+                texto = texto + "cantidad: " + listaCompleta.get(i).getCantidad() + "\n";
+                texto = texto + "volver: " + listaCompleta.get(i).getVolver() + "\n";
+                texto = texto + "motivo: " + listaCompleta.get(i).getMotivo() + "\n";
+                texto = texto + "fecha: " + listaCompleta.get(i).getFecha() + "\n";
+                texto = texto + "fechaSalida: " + listaCompleta.get(i).getFechaSalida() + "\n";
+                texto = texto + "fechaDevuelto: " + listaCompleta.get(i).getFechaDevuelto() + "\n";
                 texto = texto + "status: " + listaCompleta.get(i).getStatus() + "\n";
                 texto = texto + "descripcion: " + listaCompleta.get(i).getDescripcion() + "\n";
             }
         }
         guardarArchivo(texto, "archivoPeticionMaterial.txt");
 
-
-
-        cargarDatosEnListaMaterial();
-        texto = "";
-        for(int i=0; i<listMateriales.size(); i++){
-            if(i==0){
-                texto = "id: " + listMateriales.get(i).getId() + "\n";
-            }
-            else{
-                texto = texto + "\nid: " + listMateriales.get(i).getId() + "\n";
-            }
-            texto = texto + "idAlmacen: " + listMateriales.get(i).getIdAlmacen() + "\n";
-            texto = texto + "nombre: " + listMateriales.get(i).getNombre() + "\n";
-            if(c.getIdMaterial() == listMateriales.get(i).getId()){
-                int stock_regresado = listMateriales.get(i).getStock() + c.getCantidad();
-                texto = texto + "stock: " + stock_regresado + "\n";
-            }
-            else{
-                texto = texto + "stock: " + listMateriales.get(i).getStock() + "\n";
-            }
-
-        }
-        guardarArchivo(texto, "archivoMateriales.txt");
-
-
-        Intent intent = new Intent(Pendientes.this, Pendientes.class);
+        Intent intent = new Intent(Historial.this, Historial.class);
         intent.putExtra("almacenInfo", almacen);
         startActivity(intent);
         finish();
     }
+
 
 
 
@@ -386,7 +397,6 @@ public class Pendientes extends AppCompatActivity {
 
 
 
-
     private String abrirArchivo(String nombre){
         String listaArchivos[] = fileList();
         if(existeArchivo(listaArchivos, nombre)){
@@ -443,7 +453,7 @@ public class Pendientes extends AppCompatActivity {
             archivo.flush();
             archivo.close();
         } catch (IOException e){
-            Toast.makeText(Pendientes.this, "Error al escribir en el archivo", Toast.LENGTH_LONG).show();
+            Toast.makeText(Historial.this, "Error al escribir en el archivo", Toast.LENGTH_LONG).show();
         }
     }
 }
