@@ -44,4 +44,11 @@ public class AlmacenInicio extends AppCompatActivity {
         intent.putExtra("almacenInfo", almacen);
         startActivity(intent);
     }
+
+
+    public void pendientes(View view){
+        Intent intent = new Intent(this, Pendientes.class);
+        intent.putExtra("almacenInfo", almacen);
+        startActivity(intent);
+    }
 }

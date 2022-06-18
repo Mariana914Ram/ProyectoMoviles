@@ -7,89 +7,64 @@
     android:background="@color/background"
     tools:context=".Pendientes">
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Pendientes"
-        android:textColor="@color/naranja"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.171"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="Ultimas salidas de material"
-        android:textColor="@color/naranja"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.409"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lb_pendiente3" />
+        <TextView
+            android:id="@+id/txtPeticiones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/pendientes"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/naranja" />
 
-    <TextView
-        android:id="@+id/lb_pendiente1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:text="Pendiente1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
-    <TextView
-        android:id="@+id/lb_pendiente2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="75dp"
-        android:text="Pendiente2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lb_pendiente1" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#2196F3"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp">
 
-    <TextView
-        android:id="@+id/lb_pendiente3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="75dp"
-        android:text="Pendiente3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lb_pendiente2" />
+            <TextView
+                android:id="@+id/txtEspacioImagen"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="20" />
 
-    <TextView
-        android:id="@+id/lb_ultimaS1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
-        android:text="Ultima salida 1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            <TextView
+                android:id="@+id/txtEspacioTexto"
+                android:layout_width="238dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Información"
+                android:textColor="#FFFFFF" />
 
-    <TextView
-        android:id="@+id/lb_ultimaS2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="75dp"
-        android:text="Ultima salida 2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lb_ultimaS1" />
+            <TextView
+                android:id="@+id/txtDevuelto"
+                android:layout_width="102dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:paddingRight="5dp"
+                android:text="Devuelto"
+                android:textColor="#FDFCFC" />
+        </LinearLayout>
 
-    <TextView
-        android:id="@+id/lb_ultimaS3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="75dp"
-        android:text="Ultima salida 3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lb_ultimaS2" />
+        <ListView
+            android:id="@+id/lstv_pendientes"
+            android:layout_width="match_parent"
+            android:layout_height="502dp"
+            android:clickable="true"
+            android:headerDividersEnabled="true"
+            android:isScrollContainer="true"
+            android:nestedScrollingEnabled="true" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

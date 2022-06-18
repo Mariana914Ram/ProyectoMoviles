@@ -47,7 +47,7 @@ public class ModeloPeticionMaterial {
         this.fecha = "";
         this.fechaSalida = "";
         this.fechaDevuelto = "";
-        this.status = "aceptado"; //aceptado o rechazado o pendiente
+        this.status = "aceptado"; //aceptado o rechazado o pendiente o devuelto
         this.descripcion = "";
     }
 
