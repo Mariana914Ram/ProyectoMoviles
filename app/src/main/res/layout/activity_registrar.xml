@@ -36,6 +36,7 @@
                 android:layout_marginEnd="156dp"
                 android:ems="10"
                 android:hint="Nombre"
+                app:errorEnabled="true"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -47,6 +48,7 @@
                 android:layout_marginEnd="156dp"
                 android:ems="10"
                 android:hint="Apellidos"
+                app:errorEnabled="true"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -58,6 +60,7 @@
                 android:layout_marginEnd="156dp"
                 android:ems="10"
                 android:hint="Correo"
+                app:errorEnabled="true"
                 android:inputType="textPersonName" />
 
             <EditText
@@ -69,6 +72,7 @@
                 android:layout_marginEnd="156dp"
                 android:ems="10"
                 android:hint="Contraseña"
+                app:errorEnabled="true"
                 android:inputType="textPassword" />
 
             <EditText
@@ -80,6 +84,7 @@
                 android:layout_marginEnd="156dp"
                 android:ems="10"
                 android:hint="Repetir contraseña"
+                app:errorEnabled="true"
                 android:inputType="textPassword" />
 
             <LinearLayout
