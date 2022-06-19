@@ -51,7 +51,7 @@ public class AgregarUsuario extends AppCompatActivity {
 
 
         String texto = abrirArchivo("archivoAlmacenes.txt");
-        Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
 
         String cadena = "";
         if(!texto.equals("")){

@@ -66,7 +66,7 @@ public class AlmacenAdapter extends BaseAdapter {
         botonEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View viewer) {
-                Toast.makeText(context, "HOLA", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "HOLA", Toast.LENGTH_SHORT).show();
                 ((ListView) viewGroup).performItemClick(viewer, i, 0);
             }
         });

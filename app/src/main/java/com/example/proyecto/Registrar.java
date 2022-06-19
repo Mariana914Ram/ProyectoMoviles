@@ -126,25 +126,14 @@ public class Registrar extends AppCompatActivity {
             Intent intent = new Intent(Registrar.this, MainActivity.class);
             startActivity(intent);
             finish();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
+    }
+
+    public void cancelarRegistro(View view){
+        }
+        public void cancelarRegistro(){
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
     }
 
 

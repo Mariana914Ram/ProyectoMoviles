@@ -74,7 +74,7 @@ public class Peticion extends AppCompatActivity {
 
         String texto = abrirArchivo("archivoMateriales.txt");
         String cadena = "";
-        Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
         if(!texto.equals("")){
             String[] materiales = texto.split("\n\n");
             int contador = 0;
@@ -119,7 +119,7 @@ public class Peticion extends AppCompatActivity {
                 }
             }
             String[] materialesArray = cadena.split(", ");
-            ArrayAdapter<String> adapterMateriales = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, materialesArray);
+            ArrayAdapter<String> adapterMateriales = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, materialesArray);
             material.setAdapter(adapterMateriales);
         }
 

@@ -40,7 +40,7 @@ public class Pendientes extends AppCompatActivity {
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");
 
         String texto = abrirArchivo("archivoPeticionMaterial.txt");
-        Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
         if(!texto.equals("")){
             String[] material = texto.split("\n\n");
             int contador = 0;
@@ -443,7 +443,7 @@ public class Pendientes extends AppCompatActivity {
             archivo.flush();
             archivo.close();
         } catch (IOException e){
-            Toast.makeText(Pendientes.this, "Error al escribir en el archivo", Toast.LENGTH_LONG).show();
+            //Toast.makeText(Pendientes.this, "Error al escribir en el archivo", Toast.LENGTH_LONG).show();
         }
     }
 }

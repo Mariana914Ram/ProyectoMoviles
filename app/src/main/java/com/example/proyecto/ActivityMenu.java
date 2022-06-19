@@ -59,6 +59,7 @@ public class ActivityMenu extends AppCompatActivity {
     }
 
 
+
     public void cerrarSesion(){
         SharedPreferences preferencias = getSharedPreferences("user.dat", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferencias.edit();

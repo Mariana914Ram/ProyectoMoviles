@@ -128,7 +128,7 @@ public class vista_almacen extends AppCompatActivity {
                                 switch (viewId){
                                     case R.id.ibtnEditar:
                                         c = list.get(i);
-                                        Toast.makeText(getBaseContext(), c.getNombre(), Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(getBaseContext(), c.getNombre(), Toast.LENGTH_SHORT).show();
 
 
                                         AlertDialog.Builder mydialog = new AlertDialog.Builder(vista_almacen.this);

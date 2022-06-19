@@ -45,7 +45,7 @@ public class Historial extends AppCompatActivity {
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");
 
         String texto = abrirArchivo("archivoPeticionMaterial.txt");
-        Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
         if(!texto.equals("")){
             String[] material = texto.split("\n\n");
             int contador = 0;

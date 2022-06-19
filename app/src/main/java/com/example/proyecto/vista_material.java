@@ -44,7 +44,7 @@ public class vista_material extends AppCompatActivity {
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");
 
         String texto = abrirArchivo("archivoMateriales.txt");
-        Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
         if(!texto.equals("")){
             String[] material = texto.split("\n\n");
             int contador = 0;

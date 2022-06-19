@@ -62,8 +62,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:backgroundTint="@color/azul_a"
-                android:text="@string/cerrar_sesion"
-                android:textColor="#FFFFFF" />
+                android:onClick="cerrarSesion"
+                android:text="cerrar sesion"
+                android:textColor="#FFFFFF"
+                tools:ignore="OnClick" />
         </LinearLayout>
     </ScrollView>
 

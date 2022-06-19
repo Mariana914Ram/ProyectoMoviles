@@ -46,7 +46,7 @@ public class vista_responderSolicitudes extends AppCompatActivity {
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");
 
         String texto = abrirArchivo("archivoPeticionMaterial.txt");
-        Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
         if(!texto.equals("")){
             String[] material = texto.split("\n\n");
             int contador = 0;
@@ -238,7 +238,7 @@ public class vista_responderSolicitudes extends AppCompatActivity {
 
         //MOTIVO
         final TextView motivoText1 = new TextView(vista_responderSolicitudes.this);
-        motivoText1.setText("Fecha solicitada: ");
+        motivoText1.setText("Motivo de salida: ");
         motivoText1.setTypeface(null, Typeface.BOLD_ITALIC);
         final TextView motivoText2 = new TextView(vista_responderSolicitudes.this);
         String motivo="";

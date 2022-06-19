@@ -40,7 +40,7 @@ public class vista_usuario extends AppCompatActivity {
         ListViewUsuario=findViewById(R.id.lstv_usuarios);
 
         String texto = abrirArchivo("archivoUsuarios.txt");
-        Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
         if(texto == ""){
             //Ir a vista de que no existe el almacén
         }else {

@@ -112,6 +112,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="44dp"
                     android:backgroundTint="@color/azul_a"
+                    android:onClick="cancelarRegistro"
                     android:text="Cancelar"
                     android:textColor="@color/design_default_color_background" />
             </LinearLayout>
