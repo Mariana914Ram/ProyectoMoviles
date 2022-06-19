@@ -3,12 +3,17 @@ package com.example.proyecto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class AlmacenInicio extends AppCompatActivity {
 
+    LinearLayout layoutMaterial, layoutSalidaMaterial;
+
+    String tipoUser = "";
     ModeloAlmacen almacen;
     TextView titulo;
 
@@ -16,6 +21,20 @@ public class AlmacenInicio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_almacen_inicio);
+
+        layoutMaterial = findViewById(R.id.layoutMateriales);
+        layoutSalidaMaterial = findViewById(R.id.layoutSalidaMateriales);
+
+        SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
+        tipoUser = preferences.getString("tipo", "");
+
+        if(tipoUser.equals("normal")){
+            layoutMaterial.getLayoutParams().height=1;
+            layoutMaterial.requestLayout();
+
+            layoutSalidaMaterial.getLayoutParams().height=1;
+            layoutSalidaMaterial.requestLayout();
+        }
 
 
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");

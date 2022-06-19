@@ -27,15 +27,23 @@
                 android:textSize="34sp" />
 
 
-            <Button
-                android:id="@+id/btn_materiales"
-                android:layout_width="217dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
-                android:onClick="materiales"
-                android:text="Materiales"
-                android:textColor="#FFFFFF" />
+            <LinearLayout
+                android:id="@+id/layoutMateriales"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btn_materiales"
+                    android:layout_width="217dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:backgroundTint="#0C67F4"
+                    android:onClick="materiales"
+                    android:text="Materiales"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
 
 
             <Button
@@ -49,25 +57,33 @@
                 android:textColor="#FFFFFF" />
 
 
-            <Button
-                android:id="@+id/btn_salidaMaterial"
-                android:layout_width="215dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
-                android:onClick="peticion_materiales"
-                android:text="@string/salida_material"
-                android:textColor="#FFFFFF" />
+            <LinearLayout
+                android:id="@+id/layoutSalidaMateriales"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btn_pendientes"
-                android:layout_width="217dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
-                android:onClick="pendientes"
-                android:text="@string/pendientes"
-                android:textColor="#FFFFFF" />
+                <Button
+                    android:id="@+id/btn_salidaMaterial"
+                    android:layout_width="215dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:backgroundTint="#0C67F4"
+                    android:onClick="peticion_materiales"
+                    android:text="@string/salida_material"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/btn_pendientes"
+                    android:layout_width="217dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:backgroundTint="#0C67F4"
+                    android:onClick="pendientes"
+                    android:text="@string/pendientes"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/btn_historial"

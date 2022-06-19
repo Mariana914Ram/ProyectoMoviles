@@ -9,15 +9,30 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class ActivityMenu extends AppCompatActivity {
 
+    LinearLayout layoutUsuarios;
+
+    String tipoUser = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        layoutUsuarios = findViewById(R.id.layoutBotonUsuarios);
+
+        SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
+        tipoUser = preferences.getString("tipo", "");
+
+        if(tipoUser.equals("normal")){
+            layoutUsuarios.getLayoutParams().height=1;
+            layoutUsuarios.requestLayout();
+        }
+
     }
 
 
