@@ -8,8 +8,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -364,7 +366,7 @@ public class vista_responderSolicitudes extends AppCompatActivity {
             else{
                 texto = texto + "\nid: " + listaCompleta.get(i).getId() + "\n";
             }
-            texto = texto + "idUsuario: " + listaCompleta.get(i).getId() + "\n";
+            texto = texto + "idUsuario: " + listaCompleta.get(i).getIdUsuario() + "\n";
             texto = texto + "idAlmacen: " + listaCompleta.get(i).getIdAlmacen() + "\n";
             texto = texto + "idMaterial: " + listaCompleta.get(i).getIdMaterial() + "\n";
             texto = texto + "nombreUsuario: " + listaCompleta.get(i).getNombreUsuario() + "\n";
@@ -404,15 +406,21 @@ public class vista_responderSolicitudes extends AppCompatActivity {
         final TextView almacenText = new TextView(vista_responderSolicitudes.this);
         almacenText.setWidth(1000);
         almacenText.setText("¿Cuál es la razón del rechazo de la salida de material?");
+        final EditText razonInput = new EditText(vista_responderSolicitudes.this);
+        razonInput.setInputType(InputType.TYPE_CLASS_TEXT);
+        razonInput.setWidth(1000);
+        razonInput.setHint("Razón");
         final LinearLayout layout = new LinearLayout(vista_responderSolicitudes.this);
         layout.setPadding(40, 20, 40, 0);
+        layout.setOrientation(LinearLayout.VERTICAL);
         layout.addView(almacenText);
+        layout.addView(razonInput);
         mydialog.setView(layout);
 
         mydialog.setPositiveButton("Rechazar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                motivoRechazoModal = almacenText.getText().toString();
+                motivoRechazoModal = razonInput.getText().toString();
                 if(motivoRechazoModal.equals("")){
                     dialogInterface.cancel();
                     Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Por favor, escriba un motivo del rechazo de la salida", Snackbar.LENGTH_LONG);
@@ -447,7 +455,7 @@ public class vista_responderSolicitudes extends AppCompatActivity {
             else{
                 texto = texto + "\nid: " + listaCompleta.get(i).getId() + "\n";
             }
-            texto = texto + "idUsuario: " + listaCompleta.get(i).getId() + "\n";
+            texto = texto + "idUsuario: " + listaCompleta.get(i).getIdUsuario() + "\n";
             texto = texto + "idAlmacen: " + listaCompleta.get(i).getIdAlmacen() + "\n";
             texto = texto + "idMaterial: " + listaCompleta.get(i).getIdMaterial() + "\n";
             texto = texto + "nombreUsuario: " + listaCompleta.get(i).getNombreUsuario() + "\n";

@@ -51,4 +51,11 @@ public class AlmacenInicio extends AppCompatActivity {
         intent.putExtra("almacenInfo", almacen);
         startActivity(intent);
     }
+
+
+    public void historial(View view){
+        Intent intent = new Intent(this, Historial.class);
+        intent.putExtra("almacenInfo", almacen);
+        startActivity(intent);
+    }
 }
