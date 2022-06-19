@@ -130,10 +130,8 @@ public class Registrar extends AppCompatActivity {
     }
 
     public void cancelarRegistro(View view){
-        }
-        public void cancelarRegistro(){
-            Intent intent = new Intent(this, Login.class);
-            startActivity(intent);
+        Intent intent = new Intent(this, Login.class);
+        startActivity(intent);
     }
 
 
