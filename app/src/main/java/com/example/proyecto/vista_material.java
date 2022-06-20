@@ -31,12 +31,14 @@ import java.util.List;
 
 public class vista_material extends AppCompatActivity {
 
+    TextView txtBuscador;
     ListView ListViewMateriales;
     List<ModeloMateriales> list = new ArrayList<>();
     ModeloAlmacen almacen;
     String nombreModal = "";
     String stockModal = "";
     String tipoUser = "";
+    String buscador = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,10 @@ public class vista_material extends AppCompatActivity {
 
 
         ListViewMateriales=findViewById(R.id.lstv_materiales);
+        txtBuscador = findViewById(R.id.edt_buscador);
 
         almacen = (ModeloAlmacen) getIntent().getSerializableExtra("almacenInfo");
+        buscador = (String) getIntent().getSerializableExtra("buscador");
 
         String texto = abrirArchivo("archivoMateriales.txt");
         //Toast.makeText(this, texto, Toast.LENGTH_LONG).show();
@@ -87,8 +91,16 @@ public class vista_material extends AppCompatActivity {
                 }
 
                 if(idAlmacen_temp.equals(almacen.getId()+"")){
-                    list.add(new ModeloMateriales(Integer.parseInt(id_temp), Integer.parseInt(idAlmacen_temp), nombre_temp, Integer.parseInt(stock_temp.trim())));
-                    contador++;
+                    if(buscador.equals("")){
+                        list.add(new ModeloMateriales(Integer.parseInt(id_temp), Integer.parseInt(idAlmacen_temp), nombre_temp, Integer.parseInt(stock_temp.trim())));
+                        contador++;
+                    }
+                    else{
+                        if(nombre_temp.contains(buscador)){
+                            list.add(new ModeloMateriales(Integer.parseInt(id_temp), Integer.parseInt(idAlmacen_temp), nombre_temp, Integer.parseInt(stock_temp.trim())));
+                            contador++;
+                        }
+                    }
                 }
             }
 
@@ -119,6 +131,18 @@ public class vista_material extends AppCompatActivity {
                 });
             }
         }
+    }
+
+
+
+    public void buscarMateriales(View view){
+
+        String palabraEncontrar = txtBuscador.getText().toString();
+        Intent intent = new Intent(vista_material.this, vista_material.class);
+        intent.putExtra("almacenInfo", almacen);
+        intent.putExtra("buscador", palabraEncontrar);
+        startActivity(intent);
+        finish();
     }
 
 
@@ -208,6 +232,7 @@ public class vista_material extends AppCompatActivity {
 
                         Intent intent = new Intent(vista_material.this, vista_material.class);
                         intent.putExtra("almacenInfo", almacen);
+                        intent.putExtra("buscador", "");
                         startActivity(intent);
                         finish();
                     }
@@ -310,6 +335,7 @@ public class vista_material extends AppCompatActivity {
 
                         Intent intent = new Intent(vista_material.this, vista_material.class);
                         intent.putExtra("almacenInfo", almacen);
+                        intent.putExtra("buscador", "");
                         startActivity(intent);
                         finish();
                     }
@@ -374,6 +400,7 @@ public class vista_material extends AppCompatActivity {
 
                         Intent intent = new Intent(vista_material.this, vista_material.class);
                         intent.putExtra("almacenInfo", almacen);
+                        intent.putExtra("buscador", "");
                         startActivity(intent);
                         finish();
                     }

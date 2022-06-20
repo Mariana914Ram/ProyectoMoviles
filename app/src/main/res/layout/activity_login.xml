@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:backgroundTint="@color/background"
-    tools:context=".Login">z
+    tools:context=".Login">
 
     <EditText
         android:id="@+id/et_correo"
@@ -65,20 +65,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_contra" />
-
-    <Button
-        android:id="@+id/btn_registrar"
-        android:layout_width="146dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="158dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="159dp"
-        android:backgroundTint="@color/azul_a"
-        android:onClick="registrarU"
-        android:text="Registrarse"
-        android:textColor="@color/design_default_color_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_ingresar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,10 +30,43 @@
             android:onClick="agregarMaterial"
             android:text="+ Material" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="3dp"
+            android:paddingBottom="5dp">
+
+            <EditText
+                android:id="@+id/edt_buscador"
+                android:layout_width="288dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Nombre del material"
+                android:inputType="textPersonName" />
+
+            <ImageButton
+                android:id="@+id/ibtnBuscar"
+                android:layout_width="107dp"
+                android:layout_height="67dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_weight="50"
+                android:adjustViewBounds="true"
+                android:backgroundTint="#FFFFFF"
+                android:focusable="false"
+                android:onClick="buscarMateriales"
+                android:scaleType="fitCenter"
+                android:tag="Buscar"
+                app:srcCompat="@drawable/buscar" />
+        </LinearLayout>
+
         <ListView
             android:id="@+id/lstv_materiales"
             android:layout_width="match_parent"
-            android:layout_height="502dp"
+            android:layout_height="440dp"
             android:layout_marginTop="12dp"
             android:clickable="true"
             android:headerDividersEnabled="true"
