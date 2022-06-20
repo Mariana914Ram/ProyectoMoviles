@@ -10,13 +10,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class ActivityMenu extends AppCompatActivity {
 
     LinearLayout layoutUsuarios;
+    TextView titulo;
 
-    String tipoUser = "";
+    String tipoUser = "", nombreUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +25,17 @@ public class ActivityMenu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         layoutUsuarios = findViewById(R.id.layoutBotonUsuarios);
+        titulo = findViewById(R.id.txtTitulo);
 
         SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
         tipoUser = preferences.getString("tipo", "");
+        nombreUser = preferences.getString("nombre", "");
+
+        if(nombreUser.equals("")){
+
+        }else{
+            titulo.setText("¡Te damos la bienvenida " + nombreUser + "!\nElige una opción");
+        }
 
         if(tipoUser.equals("normal")){
             layoutUsuarios.getLayoutParams().height=1;
@@ -38,28 +47,54 @@ public class ActivityMenu extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-        getMenuInflater().inflate(R.menu.menu_overflow, menu);
-        return super.onCreateOptionsMenu(menu);
+        if(tipoUser.equals("admin")){
+            getMenuInflater().inflate(R.menu.menu_overflow, menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+        else{
+            getMenuInflater().inflate(R.menu.menu_overflow_normal, menu);
+            return super.onCreateOptionsMenu(menu);
+        }
     }
 
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int opc = item.getItemId();
-        switch (opc){
-            case R.id.itemAlmacen:
-                vistaAlmacen();
-            case R.id.itemUsuario:
-                vistaUsuario();
-            case R.id.itemCerrar:
-                cerrarSesion();
-                break;
+
+        if(tipoUser.equals("admin")){
+            int opc = item.getItemId();
+            switch (opc){
+                case R.id.itemAlmacen:
+                    vistaAlmacen();
+                    break;
+                case R.id.itemUsuario:
+                    vistaUsuario();
+                    break;
+                case R.id.itemCerrar:
+                    cerrarSesion();
+                    break;
+            }
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+        else{
+            int opc = item.getItemId();
+            switch (opc){
+                case R.id.itemAlmacen:
+                    vistaAlmacen();
+                    break;
+                case R.id.itemCerrar:
+                    cerrarSesion();
+                    break;
+            }
+            return super.onOptionsItemSelected(item);
+        }
     }
 
 
 
+    public void opcionCerrarSesion(View view){
+        cerrarSesion();
+    }
     public void cerrarSesion(){
         SharedPreferences preferencias = getSharedPreferences("user.dat", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferencias.edit();

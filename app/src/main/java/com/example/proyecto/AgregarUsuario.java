@@ -1,16 +1,19 @@
 package com.example.proyecto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +29,12 @@ import java.util.Collections;
 public class AgregarUsuario extends AppCompatActivity {
 
     EditText nombre, apellidos, correo, password, repetPassword;
-    RadioButton tipoA, tipoB;
+    CheckBox tipoA, tipoB;
     TextView tvAlmacen;
     boolean[] selectAlmacen;
     ArrayList<Integer> almacenList = new ArrayList<>();
     String[] almacenArray;
+    String tipoUser = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +46,12 @@ public class AgregarUsuario extends AppCompatActivity {
         correo = (EditText) findViewById(R.id.et_correoGuardar);
         password = (EditText) findViewById(R.id.et_contraGuardar);
         repetPassword = (EditText) findViewById(R.id.et_confirmarContra);
-
-        tipoA = (RadioButton) findViewById(R.id.rb_Admin);
-        tipoB = (RadioButton) findViewById(R.id.rb_Usuario);
-
+        tipoA = (CheckBox) findViewById(R.id.cbxAdmin);
+        tipoB = (CheckBox) findViewById(R.id.cbxNormal);
         tvAlmacen = (TextView) findViewById(R.id.tvAlmacen);
 
+        SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
+        tipoUser = preferences.getString("tipo", "");
 
 
         String texto = abrirArchivo("archivoAlmacenes.txt");
@@ -153,7 +157,6 @@ public class AgregarUsuario extends AppCompatActivity {
         boolean verificar = true;
 
         if(!tipoA.isChecked() && !tipoB.isChecked()){
-
             Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), "Debe escoger un tipo de usuario", Snackbar.LENGTH_LONG);
             snackbar.show();
             verificar = false;
@@ -370,6 +373,88 @@ public class AgregarUsuario extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+
+
+
+
+
+    //Menú
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        if(tipoUser.equals("admin")){
+            getMenuInflater().inflate(R.menu.menu_overflow, menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+        else{
+            getMenuInflater().inflate(R.menu.menu_overflow_normal, menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(tipoUser.equals("admin")){
+            int opc = item.getItemId();
+            switch (opc){
+                case R.id.itemAlmacen:
+                    vistaAlmacen();
+                    break;
+                case R.id.itemUsuario:
+                    vistaUsuario();
+                    break;
+                case R.id.itemCerrar:
+                    cerrarSesion();
+                    break;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+        else{
+            int opc = item.getItemId();
+            switch (opc){
+                case R.id.itemAlmacen:
+                    vistaAlmacen();
+                    break;
+                case R.id.itemCerrar:
+                    cerrarSesion();
+                    break;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    public void cerrarSesion(){
+        SharedPreferences preferencias = getSharedPreferences("user.dat", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.clear();
+        editor.apply();
+
+        Intent intent = new Intent(this, Login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+
+    public void opcionAlmacen(View view){
+        vistaAlmacen();
+    }
+    public void vistaAlmacen(){
+        Intent intent = new Intent(this, vista_almacen.class);
+        startActivity(intent);
+    }
+
+
+    public void opcionUsuario(View view){
+        vistaUsuario();
+    }
+    public void vistaUsuario(){
+        Intent intent = new Intent(this, vista_usuario.class);
+        startActivity(intent);
     }
 
 }

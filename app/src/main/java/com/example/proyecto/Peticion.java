@@ -1,5 +1,6 @@
 package com.example.proyecto;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -7,6 +8,8 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -40,7 +43,7 @@ public class Peticion extends AppCompatActivity {
     LinearLayout layoutFecha;
 
     ModeloAlmacen almacen;
-    String idUser = "", nombreUser = "";
+    String idUser = "", nombreUser = "", tipoUser = "";
     List<ModeloMateriales> list = new ArrayList<>();
     List<ModeloMateriales> listaCompleta = new ArrayList<>();
     String idMaterialSeleccionado = "", stockMaterialSeleccionado = "", nombreMaterialSeleccionado = "";
@@ -58,6 +61,7 @@ public class Peticion extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("user.dat", MODE_PRIVATE);
         idUser = preferences.getString("id", "");
         nombreUser = preferences.getString("nombre", "") + " " + preferences.getString("apellidos", "");
+        tipoUser = preferences.getString("tipo", "");
 
         cantidad = (EditText) findViewById(R.id.et_cantidadRequerida);
         vuelve = (RadioButton) findViewById(R.id.rb_vuelve);
@@ -119,7 +123,7 @@ public class Peticion extends AppCompatActivity {
                 }
             }
             String[] materialesArray = cadena.split(", ");
-            ArrayAdapter<String> adapterMateriales = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, materialesArray);
+            ArrayAdapter<String> adapterMateriales = new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, materialesArray);
             material.setAdapter(adapterMateriales);
         }
 
@@ -333,10 +337,18 @@ public class Peticion extends AppCompatActivity {
             guardarArchivo(texto, "archivoMateriales.txt");
 
 
-            Intent intent = new Intent(Peticion.this, vista_responderSolicitudes.class);
-            intent.putExtra("almacenInfo", almacen);
-            startActivity(intent);
-            finish();
+            if(tipoUser.equals("admin")){
+                Intent intent = new Intent(Peticion.this, vista_responderSolicitudes.class);
+                intent.putExtra("almacenInfo", almacen);
+                startActivity(intent);
+                finish();
+            }
+            else{
+                Intent intent = new Intent(Peticion.this, Historial.class);
+                intent.putExtra("almacenInfo", almacen);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 
@@ -450,5 +462,85 @@ public class Peticion extends AppCompatActivity {
         } catch (IOException e){
             Toast.makeText(Peticion.this, "Error al escribir en el archivo", Toast.LENGTH_LONG).show();
         }
+    }
+
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        if(tipoUser.equals("admin")){
+            getMenuInflater().inflate(R.menu.menu_overflow, menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+        else{
+            getMenuInflater().inflate(R.menu.menu_overflow_normal, menu);
+            return super.onCreateOptionsMenu(menu);
+        }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if(tipoUser.equals("admin")){
+            int opc = item.getItemId();
+            switch (opc){
+                case R.id.itemAlmacen:
+                    vistaAlmacen();
+                    break;
+                case R.id.itemUsuario:
+                    vistaUsuario();
+                    break;
+                case R.id.itemCerrar:
+                    cerrarSesion();
+                    break;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+        else{
+            int opc = item.getItemId();
+            switch (opc){
+                case R.id.itemAlmacen:
+                    vistaAlmacen();
+                    break;
+                case R.id.itemCerrar:
+                    cerrarSesion();
+                    break;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    public void cerrarSesion(){
+        SharedPreferences preferencias = getSharedPreferences("user.dat", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.clear();
+        editor.apply();
+
+        Intent intent = new Intent(this, Login.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+
+    public void opcionAlmacen(View view){
+        vistaAlmacen();
+    }
+    public void vistaAlmacen(){
+        Intent intent = new Intent(this, vista_almacen.class);
+        startActivity(intent);
+    }
+
+
+    public void opcionUsuario(View view){
+        vistaUsuario();
+    }
+    public void vistaUsuario(){
+        Intent intent = new Intent(this, vista_usuario.class);
+        startActivity(intent);
     }
 }

@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:backgroundTint="@color/azul_a"
-                android:onClick="cerrarSesion"
+                android:onClick="opcionCerrarSesion"
                 android:text="cerrar sesion"
                 android:textColor="#FFFFFF"
                 tools:ignore="OnClick" />

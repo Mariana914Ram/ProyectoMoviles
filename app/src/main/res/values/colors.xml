@@ -2,7 +2,7 @@
 <resources>
     <color name="azul_a">#2196F3</color>
     <color name="naranja">#FF9800</color>
-    <color name="background">#EFEAF1</color>
+    <color name="background">#FFFFFF</color>
     <color name="blanco">#FFFFFF</color>
     <color name="black">#000000</color>
 

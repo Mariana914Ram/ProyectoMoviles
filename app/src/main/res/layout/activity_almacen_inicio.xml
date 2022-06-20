@@ -24,6 +24,7 @@
                 android:layout_marginTop="44dp"
                 android:gravity="center_horizontal"
                 android:text="Almacén"
+                android:textColor="@color/naranja"
                 android:textSize="34sp" />
 
 
@@ -39,7 +40,6 @@
                     android:layout_width="217dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:backgroundTint="#0C67F4"
                     android:onClick="materiales"
                     android:text="Materiales"
                     android:textColor="#FFFFFF" />
@@ -51,7 +51,6 @@
                 android:layout_width="215dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
                 android:onClick="solicitud_materiales"
                 android:text="Solicitar materiales"
                 android:textColor="#FFFFFF" />
@@ -69,7 +68,6 @@
                     android:layout_width="215dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:backgroundTint="#0C67F4"
                     android:onClick="peticion_materiales"
                     android:text="@string/salida_material"
                     android:textColor="#FFFFFF" />
@@ -79,7 +77,6 @@
                     android:layout_width="217dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:backgroundTint="#0C67F4"
                     android:onClick="pendientes"
                     android:text="@string/pendientes"
                     android:textColor="#FFFFFF" />
@@ -90,7 +87,6 @@
                 android:layout_width="217dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:backgroundTint="#0C67F4"
                 android:onClick="historial"
                 android:text="Historial"
                 android:textColor="#FFFFFF" />
